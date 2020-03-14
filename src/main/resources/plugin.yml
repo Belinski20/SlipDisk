@@ -1,0 +1,16 @@
+name: Slipdisk
+version: ${project.version}
+main: com.belinski20.slipdisk.Slipdisk
+api-version: 1.13
+authors: [belinski20]
+description: Close to vanilla teleport plugin
+
+commands:
+  slipid:
+    permission-message: Do not have valid permissions to use
+    description: Sets the player Slip ID
+    permission: slipdisk.slipid
+  slipdisk:
+    permission-message: Do not have valid permissions to use
+    description: Gives Description of what slipdisk is
+    permission: slipdisk.slipdisk
