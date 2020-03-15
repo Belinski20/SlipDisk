@@ -8,8 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="635aa84f-e985-46c7-8e55-80be489942c9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Public/Downloads" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.33948717" />
@@ -132,10 +130,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="249" key="#com.intellij.ide.util.MemberChooser/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1583782892609" />
-    <state x="260" y="298" key="FileChooserDialogImpl" timestamp="1584156872269">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="2267" y="228" key="FileChooserDialogImpl" timestamp="1584242695844">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state x="260" y="298" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584156872269" />
+    <state x="2267" y="228" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584242695844" />
     <state width="1921" height="2" key="GridCell.Tab.0.bottom" timestamp="1584077237682">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

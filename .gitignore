@@ -29,3 +29,4 @@ target/
 
 # Gradle Auto-Imports
 *.iml
+*.xml
