@@ -81,15 +81,10 @@ public class ProfileUtils implements Utils{
             config = YamlConfiguration.loadConfiguration(file);
             config.set("Player.Name", player.getName());
             config.set("Player.Rank", "Member");
-            config.set("Player.SlipID", truncateUserName(player.getName()));
+            config.set("Player.SlipID", appendNewCode(truncateUserName(player.getName())));
             config.set("Player.SlipTotal", 0);
             config.save(file);
         }
-    }
-
-    public String truncateUserName(String username)
-    {
-        return username.substring(0, Math.min(username.length(), 15));
     }
 
     public boolean resetInformation(Player player) throws IOException {
@@ -97,16 +92,47 @@ public class ProfileUtils implements Utils{
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.exists())
         {
+            config = YamlConfiguration.loadConfiguration(file);
             if(!config.get("Player.Name").equals(player.getName()))
             {
-                config = YamlConfiguration.loadConfiguration(file);
                 config.set("Player.Name", player.getName());
-                config.set("Player.SlipID", truncateUserName(player.getName()));
+                String oldSlipID = (String)config.get("Player.SlipID");
+                config.set("Player.SlipID", appendOldCode(truncateUserName(player.getName()), oldSlipID));
                 config.save(file);
                 return true;
             }
         }
         return false;
+    }
+
+    private String truncateUserName(String username)
+    {
+        return username.substring(0, Math.min(username.length(), 10));
+    }
+
+    private String generateIDCode() {
+        String ID = "#";
+        int numberOfFiles = getProfileFiles().length;
+        for(int i = 1000; i > 0; i /= 10)
+        {
+            ID += ((numberOfFiles / i) % 10);
+        }
+        return ID;
+    }
+
+    private String getIDCodeFromID(String username)
+    {
+        return username.substring(username.length()-5);
+    }
+
+    private String appendNewCode(String username)
+    {
+        return username += generateIDCode();
+    }
+
+    private String appendOldCode(String username, String oldID)
+    {
+        return username += getIDCodeFromID(oldID);
     }
 
     public String getUserID(UUID uuid)
@@ -121,7 +147,7 @@ public class ProfileUtils implements Utils{
         return "";
     }
 
-    public File[] getProfileFiles()
+    private File[] getProfileFiles()
     {
        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users", "");
        File[] files = file.listFiles();
