@@ -2,11 +2,13 @@ package com.belinski20.slipdisk;
 
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class SlipUtils implements Utils{
 
@@ -57,5 +59,37 @@ public class SlipUtils implements Utils{
     }
 
     public void createNewSlip(Player player) {
+    }
+
+    public void resetSlipData(UUID uuid, String userID)
+    {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
+
+        String newUserID = "";
+
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            newUserID = (String)config.get("Player.ID");
+        }
+
+        File[] files = getSlipFiles();
+
+        for(File slipFile : files)
+        {
+            if(file.getName().equals(userID + ".yml"))
+            {
+                config = YamlConfiguration.loadConfiguration(slipFile);
+                config.set("Slip.ID", newUserID);
+            }
+        }
+    }
+
+    public File[] getSlipFiles()
+    {
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips", "");
+        File[] files = file.listFiles();
+        return files;
     }
 }

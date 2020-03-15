@@ -81,10 +81,44 @@ public class ProfileUtils implements Utils{
             config = YamlConfiguration.loadConfiguration(file);
             config.set("Player.Name", player.getName());
             config.set("Player.Rank", "Member");
-            config.set("Player.SlipID", "");
+            config.set("Player.SlipID", truncateUserName(player.getName()));
             config.set("Player.SlipTotal", 0);
             config.save(file);
         }
+    }
+
+    public String truncateUserName(String username)
+    {
+        return username.substring(0, Math.min(username.length(), 15));
+    }
+
+    public boolean resetInformation(Player player) throws IOException {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        if(file.exists())
+        {
+            if(!config.get("Player.Name").equals(player.getName()))
+            {
+                config = YamlConfiguration.loadConfiguration(file);
+                config.set("Player.Name", player.getName());
+                config.set("Player.SlipID", truncateUserName(player.getName()));
+                config.save(file);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getUserID(UUID uuid)
+    {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            return (String)config.get("Player.SlipID");
+        }
+        return "";
     }
 
     public File[] getProfileFiles()

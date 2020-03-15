@@ -31,6 +31,11 @@ public class SlipEvents implements Listener {
     public void onJoin(PlayerJoinEvent event) throws IOException
     {
         ((ProfileUtils)profileUtils).createPlayerFile(event.getPlayer());
+        String userID = ((ProfileUtils)profileUtils).getUserID(event.getPlayer().getUniqueId());
+        if(((ProfileUtils) profileUtils).resetInformation(event.getPlayer()))
+        {
+            ((SlipUtils)slipUtils).resetSlipData(event.getPlayer().getUniqueId(), userID);
+        }
     }
 
     @EventHandler

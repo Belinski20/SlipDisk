@@ -75,28 +75,6 @@ public final class Slipdisk extends JavaPlugin {
             player.sendMessage("");
             return true;
         }
-        if (cmd.getName().equalsIgnoreCase("slipid")) {
-            if(args.length == 0 || args[0].length() < 1 || args[0].length() > 15)
-            {
-                player.sendMessage(ChatColor.RED + "Usage - /slipid < custom id 1-15 characters >\n");
-                player.sendMessage(ChatColor.GREEN + "Sets the ID which will be displayed on the sign.");
-                return false;
-            }
-            try {
-                if (((ProfileUtils)profileUtils).contains(args[0]))
-                {
-                    return false;
-                }
-                else
-                {
-                    ((ProfileUtils)profileUtils).setProfileID(player.getUniqueId(), args[0]);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            player.sendMessage(ChatColor.GOLD + "Custom ID is set to " + args[0]);
-            return true;
-        }
         else
             return false;
     }
