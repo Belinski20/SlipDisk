@@ -1,67 +1,175 @@
 package com.belinski20.slipdisk;
 
 import org.bukkit.*;
+import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
-public class SlipUtils implements Utils{
+public class SlipUtils{
 
     private static Plugin plugin;
-
-    SlipUtils()
-    {
-
-    }
 
     SlipUtils(Plugin plugin)
     {
         this.plugin = plugin;
     }
 
-    public void add(final Location loc) {
-        int i;
-        for (i = 0; plugin.getConfig().contains(new StringBuilder(String.valueOf(i)).toString()); ++i) {}
-        plugin.getConfig().set(String.valueOf(i) + ".x", (Object)loc.getBlockX());
-        plugin.getConfig().set(String.valueOf(i) + ".y", (Object)loc.getBlockY());
-        plugin.getConfig().set(String.valueOf(i) + ".z", (Object)loc.getBlockZ());
-        plugin.getConfig().set(String.valueOf(i) + ".w", (Object)loc.getWorld().getName());
-        plugin.saveConfig();
-    }
-
-    public boolean contains(String id) throws IOException {
+    public void createUserSlipFile(String userID) throws IOException {
         FileConfiguration config = null;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + id + ".yml");
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
         if(!file.exists())
         {
-            return true;
+            file.createNewFile();
+            config = YamlConfiguration.loadConfiguration(file);
+            config.set("Slip.Total", 3);
+            config.set("Slip.Amount", 0);
+            config.save(file);
         }
+    }
+
+    public boolean contains(String userID, Sign sign)
+    {
+        if(sign.getLine(1).equalsIgnoreCase(userID))
+            return true;
         return false;
     }
 
-    public void remove(final Location loc) {
-        /*if (this.contains(loc)) {
-            for (final String s : plugin.getConfig().getKeys(false)) {
-                if (loc.getBlockX() == plugin.getConfig().getInt(String.valueOf(s) + ".x") &&
-                        loc.getBlockY() == plugin.getConfig().getInt(String.valueOf(s) + ".y") &&
-                        loc.getBlockZ() == plugin.getConfig().getInt(String.valueOf(s) + ".z") &&
-                        loc.getWorld().getName().equals(plugin.getConfig().getString(String.valueOf(s) + ".w"))) {
-                    plugin.getConfig().set(s, (Object)null);
-                    plugin.saveConfig();
-                }
+    public void addSlip(String userID, Location player, Location block) throws IOException {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            int amountSlips = (int)config.get("Slip.Amount");
+            int totalSlips = (int)config.get("Slip.Total");
+            if(amountSlips >= totalSlips)
+                return;
+            amountSlips++;
+            config.set("Slip.slips." + amountSlips + ".x", block.getBlockX());
+            config.set("Slip.slips." + amountSlips + ".y", block.getBlockY());
+            config.set("Slip.slips." + amountSlips + ".z", block.getBlockZ());
+            config.set("Slip.slips." + amountSlips + ".w", block.getWorld().getName());
+            config.set("Slip.slips." + amountSlips + ".px", player.getX());
+            config.set("Slip.slips." + amountSlips + ".py", player.getY());
+            config.set("Slip.slips." + amountSlips + ".pz", player.getZ());
+            config.set("Slip.slips." + amountSlips + ".ppitch", player.getPitch());
+            config.set("Slip.slips." + amountSlips + ".pyaw", player.getYaw());
+            config.set("Slip.Amount", amountSlips);
+            config.save(file);
+        }
+    }
+
+    private ArrayList<SlipSign> getSlips(String userID)
+    {
+        ArrayList<SlipSign> slips = new ArrayList<>();
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            int j = 0;
+            for(int i = 0; i < config.getConfigurationSection("Slip.slips.").getKeys(false).size(); i++)
+            {
+                j++;
+                SlipSign sign = new SlipSign();
+                sign.setSign(getSignLocation(j, config));
+                sign.setSlip(getPlayerLocation(j, config));
+                slips.add(sign);
             }
-        }*/
+        }
+        return slips;
     }
 
-    public void createNewSlip(Player player) {
+    private Location getSignLocation(int index, FileConfiguration config)
+    {
+        int x = (int)config.get("Slip.slips." + index + ".x");
+        int y = (int)config.get("Slip.slips." + index + ".y");
+        int z = (int)config.get("Slip.slips." + index + ".z");
+        String w = (String)config.get("Slip.slips." + index + ".w");
+        World world = Bukkit.getWorld(w);
+        Location location = new Location(world, x, y, z);
+        return location;
     }
 
-    public void resetSlipData(UUID uuid, String userID)
+    private Location getPlayerLocation(int index, FileConfiguration config)
+    {
+        double x = (double)config.get("Slip.slips." + index + ".px");
+        double y = (double)config.get("Slip.slips." + index + ".py");
+        double z = (double)config.get("Slip.slips." + index + ".pz");
+        double pitch = (double)config.get("Slip.slips." + index + ".ppitch");
+        double yaw = (double)config.get("Slip.slips." + index + ".pyaw");
+        String w = (String)config.get("Slip.slips." + index + ".w");
+        World world = Bukkit.getWorld(w);
+        Location location = new Location(world, x, y, z, (float)yaw, (float)pitch);
+        return location;
+    }
+
+    public void removeSlip(Location location, String userID) throws IOException {
+        ArrayList<SlipSign> slips = getSlips(userID);
+        SlipSign slipToRemove = new SlipSign();
+        slipToRemove.setSign(location);
+
+        for(SlipSign slip: slips)
+        {
+            if(slip.getSign().equals(slipToRemove.getSign()))
+            {
+                slips.remove(slip);
+                fixSlips(userID, slips);
+                return;
+            }
+        }
+    }
+
+    public Location nextTeleport(String userID, Location location)
+    {
+        ArrayList<SlipSign> slips = getSlips(userID);
+        for(int i = 0; i < slips.size(); i++)
+        {
+            if(slips.get(i).getSign().equals(location))
+            {
+                if(i == slips.size()-1)
+                {
+                    return slips.get(0).getSlip();
+                }
+                else
+                    return slips.get(i+1).getSlip();
+            }
+        }
+        return null;
+    }
+
+    private void fixSlips(String userID, ArrayList<SlipSign> remainingSlips) throws IOException {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        setAmountZero(userID);
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            config.set("Slip.slips", null);
+            config.save(file);
+            for(int i = 0; i <= remainingSlips.size()-1; i++)
+            {
+                addSlip(userID, remainingSlips.get(i).getSlip(), remainingSlips.get(i).getSign());
+            }
+        }
+    }
+
+    private void setAmountZero(String userID) throws IOException {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        config = YamlConfiguration.loadConfiguration(file);
+        config.set("Slip.Amount", 0);
+        config.save(file);
+    }
+
+    public void updateSlipData(UUID uuid, String userID)
     {
         FileConfiguration config = null;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
@@ -82,14 +190,51 @@ public class SlipUtils implements Utils{
             {
                 config = YamlConfiguration.loadConfiguration(slipFile);
                 config.set("Slip.ID", newUserID);
+                //updateSigns(newUserID);
             }
         }
     }
 
-    public File[] getSlipFiles()
+    public String getUserIDFromSign(Sign sign)
+    {
+        return sign.getLine(1);
+    }
+
+    private File[] getSlipFiles()
     {
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips", "");
         File[] files = file.listFiles();
         return files;
+    }
+
+    public int getMaxSlip(String userID)
+    {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+
+        int totalAmountSlips = 0;
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+
+            totalAmountSlips = (int)config.get("Slip.Total");
+        }
+        return totalAmountSlips;
+    }
+
+    public boolean hasMaxSlips(String userID)
+    {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+
+            int totalAmountSlips = (int)config.get("Slip.Total");
+            int currentAmountSlips = (int)config.get("Slip.Amount");
+            return !(currentAmountSlips < totalAmountSlips);
+        }
+        return true;
     }
 }

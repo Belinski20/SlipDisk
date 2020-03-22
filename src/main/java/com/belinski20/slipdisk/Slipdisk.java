@@ -17,8 +17,8 @@ import java.io.IOException;
 public final class Slipdisk extends JavaPlugin {
 
     private static Plugin plugin;
-    private Utils slipUtils;
-    private Utils profileUtils;
+    private SlipUtils slipUtils;
+    private ProfileUtils profileUtils;
 
     @Override
     public void onEnable() {
@@ -45,6 +45,11 @@ public final class Slipdisk extends JavaPlugin {
             }
             else
                 System.out.println("Slip Directory not Created");
+        }
+        try {
+            createRankFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
