@@ -1,6 +1,8 @@
 package com.belinski20.slipdisk;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,26 +16,38 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class SlipEvents implements Listener {
 
     private SlipUtils slipUtils;
     private ProfileUtils profileUtils;
+    private PermissionIntegration permissionIntegration;
+    private Plugin plugin;
 
-    SlipEvents(SlipUtils slipUtils, ProfileUtils profileUtils)
+    SlipEvents(SlipUtils slipUtils, ProfileUtils profileUtils, PermissionIntegration permissionIntegration, Plugin plugin)
     {
         this.slipUtils = slipUtils;
         this.profileUtils = profileUtils;
+        this.permissionIntegration = permissionIntegration;
+        this.plugin = plugin;
     }
+
+    private static final BlockFace[] SIDES = new BlockFace[] {
+            BlockFace.UP,
+            BlockFace.NORTH,
+            BlockFace.SOUTH,
+            BlockFace.WEST,
+            BlockFace.EAST
+    };
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException
     {
-        profileUtils.createPlayerFile(event.getPlayer());
+        Player player = event.getPlayer();
+        String rank = permissionIntegration.getUserRank(player);
+        profileUtils.createPlayerFile(player, rank, permissionIntegration.getSlipTotal(rank));
         String userID = profileUtils.getUserID(event.getPlayer().getUniqueId());
-        slipUtils.createUserSlipFile(userID);
+        slipUtils.createUserSlipFile(userID, rank);
         if(profileUtils.resetInformation(event.getPlayer()))
         {
             slipUtils.updateSlipData(event.getPlayer().getUniqueId(), userID);
@@ -53,7 +67,7 @@ public class SlipEvents implements Listener {
             event.setLine(1, userID);
             profileUtils.increaseSlipAmount();
             player.sendMessage(ChatColor.GOLD + "Created a new slip gate!");
-            System.out.println(ChatColor.GOLD + player.getName() +  " created a new slip gate!");
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + player.getName() +  " created a new slip gate!");
         }
         else
         {
@@ -91,14 +105,39 @@ public class SlipEvents implements Listener {
 
         Sign sign = (Sign)event.getClickedBlock().getState();
 
+        if(!sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
+            return;
+
         String userID = slipUtils.getUserIDFromSign(sign);
 
         event.getPlayer().teleport(slipUtils.nextTeleport(userID, event.getClickedBlock().getLocation()));
     }
 
     @EventHandler
-    public void onBlockPhysics(BlockPhysicsEvent event)
-    {
+    public void onSignBreak(BlockBreakEvent event) throws IOException {
+        Block block = event.getBlock();
+        for(BlockFace side: SIDES)
+        {
+            Block sideBlock = block.getRelative(side);
+            if(sideBlock.getState() instanceof Sign)
+            {
+                Sign sign = (Sign)sideBlock.getState();
+                if(sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
+                {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
 
+    @EventHandler
+    public void onPhysicsSignBreak(BlockPhysicsEvent event) throws IOException {
+        Block block = event.getBlock();
+        if(block.getState() instanceof Sign)
+        {
+            Sign sign = (Sign)block.getState();
+            if(slipUtils.contains(sign.getLine(1), sign))
+                slipUtils.removeSlip(event.getBlock().getLocation(), sign.getLine(1));
+        }
     }
 }

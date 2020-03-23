@@ -4,8 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -19,13 +17,15 @@ public final class Slipdisk extends JavaPlugin {
     private static Plugin plugin;
     private SlipUtils slipUtils;
     private ProfileUtils profileUtils;
+    private PermissionIntegration permissionIntegration;
 
     @Override
     public void onEnable() {
         plugin = this;
-        slipUtils = new SlipUtils(getPlugin());
-        profileUtils = new ProfileUtils(getPlugin());
-        registerEvents(this, new SlipEvents(slipUtils, profileUtils));
+        slipUtils = new SlipUtils(this);
+        profileUtils = new ProfileUtils(this);
+        permissionIntegration = new PermissionIntegration(this);
+        registerEvents(this, new SlipEvents(slipUtils, profileUtils, permissionIntegration, this));
         File userDirectory = new File(getDataFolder(), "users");
         File slipDirectory = new File(getDataFolder(), "slips");
         if(!userDirectory.exists())
@@ -47,7 +47,7 @@ public final class Slipdisk extends JavaPlugin {
                 System.out.println("Slip Directory not Created");
         }
         try {
-            createRankFile();
+            permissionIntegration.createRankFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,32 +80,24 @@ public final class Slipdisk extends JavaPlugin {
             player.sendMessage("");
             return true;
         }
+        if(cmd.getName().equalsIgnoreCase("update"))
+        {
+            String rank = permissionIntegration.getUserRank(player);
+            int total = permissionIntegration.getSlipTotal(rank);
+            try {
+                profileUtils.updateRank(player, rank, total);
+                slipUtils.updateSlipFile(profileUtils.getUserID(player.getUniqueId()), total);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
         else
             return false;
-    }
-
-    public void createRankFile() throws IOException {
-        FileConfiguration config = null;
-        File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
-
-        if(!rankFile.exists())
-        {
-            rankFile.createNewFile();
-            config = YamlConfiguration.loadConfiguration(rankFile);
-            config.set("Ranks.Member", 3);
-            config.set("Ranks.Admin", 3);
-            config.set("Ranks.Owner", 4);
-            config.save(rankFile);
-        }
     }
 
     public static void registerEvents(org.bukkit.plugin.Plugin plugin, Listener... listeners){
         for(Listener listener: listeners)
             Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
-    }
-
-    public static Plugin getPlugin()
-    {
-        return plugin;
     }
 }

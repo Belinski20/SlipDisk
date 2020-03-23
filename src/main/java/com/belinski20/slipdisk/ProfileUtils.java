@@ -1,6 +1,5 @@
 package com.belinski20.slipdisk;
 
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -14,28 +13,12 @@ public class ProfileUtils{
 
     private static Plugin plugin;
 
-    ProfileUtils()
-    {
-
-    }
-
     ProfileUtils(Plugin plugin)
     {
         this.plugin = plugin;
     }
 
-    public boolean contains(String id) {
-        FileConfiguration config;
-        for(File file: getProfileFiles())
-        {
-            config = YamlConfiguration.loadConfiguration(file);
-            if(config.getString("Player.SlipID").equalsIgnoreCase((id)))
-                return true;
-        }
-        return false;
-    }
-
-    public void createPlayerFile(Player player) throws IOException {
+    public void createPlayerFile(Player player, String rank, int slipTotal) throws IOException {
         FileConfiguration config = null;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
         if(!file.exists())
@@ -43,9 +26,9 @@ public class ProfileUtils{
             file.createNewFile();
             config = YamlConfiguration.loadConfiguration(file);
             config.set("Player.Name", player.getName());
-            config.set("Player.Rank", "Member");
+            config.set("Player.Rank", rank);
             config.set("Player.SlipID", appendNewCode(truncateUserName(player.getName())));
-            config.set("Player.SlipTotal", 0);
+            config.set("Player.SlipTotal", slipTotal);
             config.save(file);
         }
     }
@@ -66,6 +49,18 @@ public class ProfileUtils{
             }
         }
         return false;
+    }
+
+    public void updateRank(Player player, String rank, int slipTotal) throws IOException {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            config.set("Player.Rank", rank);
+            config.set("Player.SlipTotal", slipTotal);
+            config.save(file);
+        }
     }
 
     private String truncateUserName(String username)
@@ -118,5 +113,17 @@ public class ProfileUtils{
     }
 
     public void increaseSlipAmount() {
+    }
+
+    public String getRank(UUID uuid)
+    {
+        FileConfiguration config = null;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            return (String)config.get("Player.Rank");
+        }
+        return "";
     }
 }
