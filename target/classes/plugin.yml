@@ -1,0 +1,17 @@
+name: Slipdisk
+version: 1.0
+main: com.belinski20.slipdisk.Slipdisk
+api-version: 1.15
+authors: [belinski20]
+description: Close to vanilla teleport plugin
+depend: [Vault]
+
+commands:
+  slipdisk:
+    permission-message: Do not have valid permissions to use
+    description: Gives Description of what slipdisk is
+    permission: slipdisk.slip
+  update:
+    permission-message: Do not have valid permissions to use
+    description: Goes through each player and updates ranks and slip Totals
+    permission: slipdisk.update
