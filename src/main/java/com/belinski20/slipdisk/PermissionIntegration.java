@@ -27,7 +27,7 @@ public class PermissionIntegration {
         RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
         if(perms != null)
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Found to permissions!");
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Found permissions!");
         else
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Permissions not found!");
         return perms != null;

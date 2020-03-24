@@ -84,15 +84,18 @@ public final class Slipdisk extends JavaPlugin {
         }
         if(cmd.getName().equalsIgnoreCase("update"))
         {
-            String rank = permissionIntegration.getUserRank(player);
-            int total = permissionIntegration.getSlipTotal(rank);
-            try {
-                profileUtils.updateRank(player, rank, total);
-                slipUtils.updateSlipFile(profileUtils.getUserID(player.getUniqueId()), total);
-            } catch (IOException e) {
-                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Update Command Error! Error Below");
-                e.printStackTrace();
-                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "End of Update Command Error!");            }
+            for(Player players : getServer().getOnlinePlayers())
+            {
+                String rank = permissionIntegration.getUserRank(players);
+                int total = permissionIntegration.getSlipTotal(rank);
+                try {
+                    profileUtils.updateRank(players, rank, total);
+                    slipUtils.updateSlipFile(profileUtils.getUserID(players.getUniqueId()), total);
+                } catch (IOException e) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Update Command Error! Error Below");
+                    e.printStackTrace();
+                    getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "End of Update Command Error!");            }
+            }
             return true;
         }
         else

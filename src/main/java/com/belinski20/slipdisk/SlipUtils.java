@@ -175,27 +175,26 @@ public class SlipUtils{
     public void updateSlipData(UUID uuid, String userID) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
-
         String newUserID = "";
 
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
-            newUserID = (String)config.get("Player.ID");
+            newUserID = (String)config.get("Player.SlipID");
         }
 
         File[] files = getSlipFiles();
 
         for(File slipFile : files)
         {
-            if(file.getName().equals(userID + ".yml"))
+            if(slipFile.getName().equals(userID + ".yml"))
             {
                 config = YamlConfiguration.loadConfiguration(slipFile);
-                config.set("Slip.ID", newUserID);
-                updateSigns(newUserID);
                 File newFile = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + newUserID + ".yml");
-                file.renameTo(newFile);
-                config.save(file);
+                slipFile.renameTo(newFile);
+                config.save(slipFile);
+                slipFile.delete();
+                updateSigns(newUserID);
             }
         }
     }
@@ -214,14 +213,17 @@ public class SlipUtils{
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
 
-        for(int index = 0; index <= config.getConfigurationSection("Slip.slips").getKeys(false).size(); index++)
+        int j = 0;
+        for(int index = 0; index < config.getConfigurationSection("Slip.slips").getKeys(false).size(); index++)
         {
-            int x = (int)config.get("Slip.slips." + index + ".x");
-            int y = (int)config.get("Slip.slips." + index + ".y");
-            int z = (int)config.get("Slip.slips." + index + ".z");
-            String w = (String)config.get("Slip.slips." + index + ".w");
+            j++;
+            int x = (int)config.get("Slip.slips." + j + ".x");
+            int y = (int)config.get("Slip.slips." + j + ".y");
+            int z = (int)config.get("Slip.slips." + j + ".z");
+            String w = (String)config.get("Slip.slips." + j + ".w");
             Sign sign = (Sign)plugin.getServer().getWorld(w).getBlockAt(x, y, z).getState();
             sign.setLine(1, userID);
+            sign.update();
         }
     }
 
