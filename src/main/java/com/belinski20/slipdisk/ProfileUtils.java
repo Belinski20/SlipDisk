@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ProfileUtils{
+class ProfileUtils{
 
     private static Plugin plugin;
 

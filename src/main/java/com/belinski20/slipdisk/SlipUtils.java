@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class SlipUtils{
+class SlipUtils{
 
     private static Plugin plugin;
 
@@ -266,6 +266,16 @@ public class SlipUtils{
             int currentAmountSlips = (int)config.get("Slip.Amount");
             return !(currentAmountSlips < totalAmountSlips);
         }
+        return true;
+    }
+
+    public boolean slipExists(String userID) {
+        if(userID == "")
+            return false;
+        FileConfiguration config;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        if(!file.exists())
+            return false;
         return true;
     }
 }

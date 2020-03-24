@@ -17,7 +17,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.IOException;
 
-public class SlipEvents implements Listener {
+class SlipEvents implements Listener {
 
     private SlipUtils slipUtils;
     private ProfileUtils profileUtils;
@@ -80,8 +80,11 @@ public class SlipEvents implements Listener {
     public void onBlockBreak(BlockBreakEvent event) throws IOException {
         if(event.getBlock().getState() instanceof Sign)
         {
+            Sign sign = (Sign)event.getBlock().getState();
             String userID = profileUtils.getUserID(event.getPlayer().getUniqueId());
-            if(!((Sign) event.getBlock().getState()).getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
+            if(!sign.getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
+                return;
+            if(slipUtils.slipExists(sign.getLine(1)))
                 return;
             if(!slipUtils.contains(userID, (Sign)event.getBlock().getState()))
             {
