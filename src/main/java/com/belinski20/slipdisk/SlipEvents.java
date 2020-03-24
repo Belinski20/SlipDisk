@@ -84,7 +84,7 @@ class SlipEvents implements Listener {
             String userID = profileUtils.getUserID(event.getPlayer().getUniqueId());
             if(!sign.getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
                 return;
-            if(slipUtils.slipExists(sign.getLine(1)))
+            if(slipUtils.slipExists(slipUtils.getUserIDFromSign(sign)))
                 return;
             if(!slipUtils.contains(userID, (Sign)event.getBlock().getState()))
             {
@@ -113,6 +113,9 @@ class SlipEvents implements Listener {
             return;
 
         String userID = slipUtils.getUserIDFromSign(sign);
+
+        if(slipUtils.slipExists(sign.getLine(1)))
+            return;
 
         event.getPlayer().teleport(slipUtils.nextTeleport(userID, event.getClickedBlock().getLocation()));
     }
