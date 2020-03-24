@@ -90,6 +90,7 @@ public class SlipEvents implements Listener {
             else
             {
                 slipUtils.removeSlip(event.getBlock().getLocation(), userID);
+                event.getPlayer().sendMessage(ChatColor.GREEN + "Slip Un-Registered From SlipDisk!");
             }
         }
     }
@@ -114,7 +115,7 @@ public class SlipEvents implements Listener {
     }
 
     @EventHandler
-    public void onSignBreak(BlockBreakEvent event) throws IOException {
+    public void onSignBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
         for(BlockFace side: SIDES)
         {
@@ -125,6 +126,7 @@ public class SlipEvents implements Listener {
                 if(sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
                 {
                     event.setCancelled(true);
+                    event.getPlayer().sendMessage(ChatColor.DARK_RED + "A Slip Is Connected to This Block!");
                 }
             }
         }
@@ -136,8 +138,14 @@ public class SlipEvents implements Listener {
         if(block.getState() instanceof Sign)
         {
             Sign sign = (Sign)block.getState();
-            if(slipUtils.contains(sign.getLine(1), sign))
+            if(!sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
+                return;
+            String userID = sign.getLine(1);
+            if(slipUtils.contains(userID, sign))
+            {
                 slipUtils.removeSlip(event.getBlock().getLocation(), sign.getLine(1));
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "A Slip For " +  userID + " Broke Due To Gravity.");
+            }
         }
     }
 }

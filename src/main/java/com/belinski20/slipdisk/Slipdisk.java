@@ -32,24 +32,26 @@ public final class Slipdisk extends JavaPlugin {
         {
             if(userDirectory.mkdirs())
             {
-                System.out.println("User Directory Created");
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "User Directory Created");
             }
             else
-                System.out.println("User Directory not Created");
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Failed To Create User Directory");
         }
         if(!slipDirectory.exists())
         {
             if(slipDirectory.mkdirs())
             {
-                System.out.println("Slip Directory Created");
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Slip Directory Created");
             }
             else
-                System.out.println("Slip Directory not Created");
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Failed To Create Slip Directory");
         }
         try {
             permissionIntegration.createRankFile();
         } catch (IOException e) {
+            getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Permission Integration File was not created! Error Below");
             e.printStackTrace();
+            getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "End of Permission Integration Error!");
         }
     }
 
@@ -58,7 +60,7 @@ public final class Slipdisk extends JavaPlugin {
         plugin = null;
     }
 
-    public boolean onCommand(final CommandSender sender, final Command cmd, final String lable, final String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
         if (!(sender instanceof Player)) {
             return false;
         }
@@ -88,8 +90,9 @@ public final class Slipdisk extends JavaPlugin {
                 profileUtils.updateRank(player, rank, total);
                 slipUtils.updateSlipFile(profileUtils.getUserID(player.getUniqueId()), total);
             } catch (IOException e) {
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Update Command Error! Error Below");
                 e.printStackTrace();
-            }
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "End of Update Command Error!");            }
             return true;
         }
         else

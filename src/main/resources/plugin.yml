@@ -13,5 +13,5 @@ commands:
     permission: slipdisk.slip
   update:
     permission-message: Do not have valid permissions to use
-    description: Goes through each player and updates ranks and slip Totals
+    description: Goes through each player's file and updates ranks and slip totals from permissions
     permission: slipdisk.update

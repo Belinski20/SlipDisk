@@ -1,6 +1,7 @@
 package com.belinski20.slipdisk;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
@@ -36,6 +37,7 @@ public class SlipUtils{
             config.set("Slip.Total", slipTotal);
             config.set("Slip.Amount", 0);
             config.save(file);
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Created Slip File: " + userID + ".yml");
         }
     }
 
@@ -69,9 +71,9 @@ public class SlipUtils{
         }
     }
 
-    private ArrayList<SlipSign> getSlips(String userID)
+    private ArrayList<Slip> getSlips(String userID)
     {
-        ArrayList<SlipSign> slips = new ArrayList<>();
+        ArrayList<Slip> slips = new ArrayList<>();
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
         if(file.exists())
@@ -81,9 +83,9 @@ public class SlipUtils{
             for(int i = 0; i < config.getConfigurationSection("Slip.slips.").getKeys(false).size(); i++)
             {
                 j++;
-                SlipSign sign = new SlipSign();
-                sign.setSign(getSignLocation(j, config));
-                sign.setSlip(getPlayerLocation(j, config));
+                Slip sign = new Slip();
+                sign.setSignLocation(getSignLocation(j, config));
+                sign.setPlayerLocation(getPlayerLocation(j, config));
                 slips.add(sign);
             }
         }
@@ -113,13 +115,13 @@ public class SlipUtils{
     }
 
     public void removeSlip(Location location, String userID) throws IOException {
-        ArrayList<SlipSign> slips = getSlips(userID);
-        SlipSign slipToRemove = new SlipSign();
-        slipToRemove.setSign(location);
+        ArrayList<Slip> slips = getSlips(userID);
+        Slip slipToRemove = new Slip();
+        slipToRemove.setSignLocation(location);
 
-        for(SlipSign slip: slips)
+        for(Slip slip: slips)
         {
-            if(slip.getSign().equals(slipToRemove.getSign()))
+            if(slip.getSignLocation().equals(slipToRemove.getSignLocation()))
             {
                 slips.remove(slip);
                 fixSlips(userID, slips);
@@ -130,23 +132,23 @@ public class SlipUtils{
 
     public Location nextTeleport(String userID, Location location)
     {
-        ArrayList<SlipSign> slips = getSlips(userID);
+        ArrayList<Slip> slips = getSlips(userID);
         for(int i = 0; i < slips.size(); i++)
         {
-            if(slips.get(i).getSign().equals(location))
+            if(slips.get(i).getSignLocation().equals(location))
             {
                 if(i == slips.size()-1)
                 {
-                    return slips.get(0).getSlip();
+                    return slips.get(0).getPlayerLocation();
                 }
                 else
-                    return slips.get(i+1).getSlip();
+                    return slips.get(i+1).getPlayerLocation();
             }
         }
         return null;
     }
 
-    private void fixSlips(String userID, ArrayList<SlipSign> remainingSlips) throws IOException {
+    private void fixSlips(String userID, ArrayList<Slip> remainingSlips) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
         setAmountZero(userID);
@@ -157,7 +159,7 @@ public class SlipUtils{
             config.save(file);
             for(int i = 0; i <= remainingSlips.size()-1; i++)
             {
-                addSlip(userID, remainingSlips.get(i).getSlip(), remainingSlips.get(i).getSign());
+                addSlip(userID, remainingSlips.get(i).getPlayerLocation(), remainingSlips.get(i).getSignLocation());
             }
         }
     }

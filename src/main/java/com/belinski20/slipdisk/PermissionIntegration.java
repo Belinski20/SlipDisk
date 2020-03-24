@@ -1,6 +1,7 @@
 package com.belinski20.slipdisk;
 
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -25,6 +26,10 @@ public class PermissionIntegration {
     {
         RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
+        if(perms != null)
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Found to permissions!");
+        else
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Permissions not found!");
         return perms != null;
     }
 

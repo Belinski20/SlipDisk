@@ -1,5 +1,6 @@
 package com.belinski20.slipdisk;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -15,11 +16,11 @@ public class ProfileUtils{
 
     ProfileUtils(Plugin plugin)
     {
-        this.plugin = plugin;
+        ProfileUtils.plugin = plugin;
     }
 
     public void createPlayerFile(Player player, String rank, int slipTotal) throws IOException {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
         if(!file.exists())
         {
@@ -30,11 +31,12 @@ public class ProfileUtils{
             config.set("Player.SlipID", appendNewCode(truncateUserName(player.getName())));
             config.set("Player.SlipTotal", slipTotal);
             config.save(file);
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Created Player File: " + player.getUniqueId() + ".yml");
         }
     }
 
     public boolean resetInformation(Player player) throws IOException {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.exists())
         {
@@ -52,7 +54,7 @@ public class ProfileUtils{
     }
 
     public void updateRank(Player player, String rank, int slipTotal) throws IOException {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.exists())
         {
