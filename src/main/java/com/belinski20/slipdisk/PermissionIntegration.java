@@ -62,8 +62,6 @@ class PermissionIntegration {
         FileConfiguration config;
         File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
         config = YamlConfiguration.loadConfiguration(rankFile);
-<<<<<<< HEAD
-<<<<<<< HEAD
         if(config.get("Ranks." + rank) != null)
         {
             int total = (int)config.get("Ranks." + rank);
@@ -71,12 +69,6 @@ class PermissionIntegration {
         }
         plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Rank (" + rank + ") not found in Ranks.yml!");
         return -1;
-=======
-        return (int)config.get("Ranks." + rank);
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-=======
-        return (int)config.get("Ranks." + rank);
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     }
 
     public String getUserRank(Player player)

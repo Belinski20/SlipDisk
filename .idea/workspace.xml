@@ -8,20 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="635aa84f-e985-46c7-8e55-80be489942c9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/PermissionIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/PermissionIntegration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-=======
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,18 +52,6 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33948717" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Remote.Unnamed">
     <configuration name="SlipDisk build" type="MavenRunConfiguration" factoryName="Maven">
@@ -119,6 +98,18 @@
       <item itemvalue="Maven.SlipDisk build" />
       <item itemvalue="Remote.Unnamed" />
     </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\Belinski20\AppData\Roaming\Subversion</configuration>
@@ -238,17 +229,9 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-<<<<<<< HEAD
-          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java</url>
-          <line>82</line>
-          <properties class="com.belinski20.slipdisk.ProfileUtils" method="getIDCodeFromID">
-=======
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
           <line>124</line>
-          <properties class="com.belinski20.slipdisk.SlipEvents">
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-            <option name="EMULATED" value="true" />
-          </properties>
+          <properties class="com.belinski20.slipdisk.SlipEvents" />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
@@ -261,7 +244,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-<<<<<<< HEAD
           <line>187</line>
           <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSlipData">
             <option name="EMULATED" value="true" />
@@ -270,19 +252,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-<<<<<<< HEAD
-          <line>227</line>
-          <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSigns">
-=======
           <line>208</line>
-          <properties class="com.belinski20.slipdisk.SlipUtils">
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-=======
-          <line>208</line>
-          <properties class="com.belinski20.slipdisk.SlipUtils">
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-            <option name="EMULATED" value="true" />
-          </properties>
+          <properties class="com.belinski20.slipdisk.SlipUtils" />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

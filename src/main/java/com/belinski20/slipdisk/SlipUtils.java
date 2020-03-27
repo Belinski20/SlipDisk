@@ -308,27 +308,20 @@ class SlipUtils{
         return true;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public Location getNextSignLocation(String userID, Location location)
-    {
+
+    public Location getNextSignLocation(String userID, Location location) {
         ArrayList<Slip> slips = getSlips(userID);
-        for(int i = 0; i < slips.size(); i++)
-        {
-            if(slips.get(i).getSignLocation().equals(location))
-            {
-                if(i == slips.size()-1)
-                {
+        for (int i = 0; i < slips.size(); i++) {
+            if (slips.get(i).getSignLocation().equals(location)) {
+                if (i == slips.size() - 1) {
                     return slips.get(0).getSignLocation();
-                }
-                else
-                    return slips.get(i+1).getSignLocation();
+                } else
+                    return slips.get(i + 1).getSignLocation();
             }
         }
         return null;
-=======
-=======
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+    }
+
     public boolean slipExists(String userID) {
         if(userID == "")
             return false;
@@ -337,9 +330,5 @@ class SlipUtils{
         if(!file.exists())
             return false;
         return true;
-<<<<<<< HEAD
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
-=======
->>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     }
 }
