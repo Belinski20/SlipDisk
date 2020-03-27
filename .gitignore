@@ -30,3 +30,5 @@ target/
 # Gradle Auto-Imports
 *.iml
 *.xml
+*.xml
+.idea/workspace.xml

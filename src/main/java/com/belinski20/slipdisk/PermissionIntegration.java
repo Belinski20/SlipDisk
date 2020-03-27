@@ -11,7 +11,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import java.io.File;
 import java.io.IOException;
 
-public class PermissionIntegration {
+class PermissionIntegration {
 
     private Plugin plugin;
     private Permission perms;
@@ -22,7 +22,7 @@ public class PermissionIntegration {
         setupPermissions();
     }
 
-    private boolean setupPermissions()
+    private void setupPermissions()
     {
         RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
@@ -30,10 +30,9 @@ public class PermissionIntegration {
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Found permissions!");
         else
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Permissions not found!");
-        return perms != null;
     }
 
-    public Permission getPermissions() {
+    private Permission getPermissions() {
         return perms;
     }
 
@@ -60,11 +59,24 @@ public class PermissionIntegration {
 
     public int getSlipTotal(String rank)
     {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
         config = YamlConfiguration.loadConfiguration(rankFile);
-        int total = (int)config.get("Ranks." + rank);
-        return total;
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if(config.get("Ranks." + rank) != null)
+        {
+            int total = (int)config.get("Ranks." + rank);
+            return total;
+        }
+        plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Rank (" + rank + ") not found in Ranks.yml!");
+        return -1;
+=======
+        return (int)config.get("Ranks." + rank);
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+=======
+        return (int)config.get("Ranks." + rank);
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     }
 
     public String getUserRank(Player player)

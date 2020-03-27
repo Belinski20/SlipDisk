@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ProfileUtils{
+class ProfileUtils{
 
     private static Plugin plugin;
 
@@ -41,10 +41,10 @@ public class ProfileUtils{
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
-            if(!config.get("Player.Name").equals(player.getName()))
+            if(config.get("Player.Name") != player.getName())
             {
                 config.set("Player.Name", player.getName());
-                String oldSlipID = (String)config.get("Player.SlipID");
+                String oldSlipID = String.valueOf(config.get("Player.SlipID"));
                 config.set("Player.SlipID", appendOldCode(truncateUserName(player.getName()), oldSlipID));
                 config.save(file);
                 return true;
@@ -92,7 +92,7 @@ public class ProfileUtils{
 
     private String appendOldCode(String username, String oldID)
     {
-        return username += getIDCodeFromID(oldID);
+        return username + getIDCodeFromID(oldID);
     }
 
     public String getUserID(UUID uuid)
@@ -119,7 +119,7 @@ public class ProfileUtils{
 
     public String getRank(UUID uuid)
     {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
         if(file.exists())
         {
@@ -127,5 +127,17 @@ public class ProfileUtils{
             return (String)config.get("Player.Rank");
         }
         return "";
+    }
+
+    public String transferFix(String userID)
+    {
+        FileConfiguration config;
+        for(File file: getProfileFiles())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+            if(config.get("Player.Name").equals(userID))
+                return (String)config.get("Player.SlipID");
+        }
+        return null;
     }
 }

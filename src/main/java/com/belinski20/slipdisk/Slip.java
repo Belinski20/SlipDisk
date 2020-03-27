@@ -2,7 +2,7 @@ package com.belinski20.slipdisk;
 
 import org.bukkit.Location;
 
-public class Slip {
+class Slip {
     private Location signLocation;
     private Location playerLocation;
 

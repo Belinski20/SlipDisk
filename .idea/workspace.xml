@@ -7,14 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="635aa84f-e985-46c7-8e55-80be489942c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_15_2_R0_1_SNAPSHOT.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SlipDisk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SlipDisk.iml" afterDir="false" />
+<<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/PermissionIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/PermissionIntegration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,6 +61,18 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33948717" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Remote.Unnamed">
     <configuration name="SlipDisk build" type="MavenRunConfiguration" factoryName="Maven">
@@ -100,18 +119,6 @@
       <item itemvalue="Maven.SlipDisk build" />
       <item itemvalue="Remote.Unnamed" />
     </list>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\Belinski20\AppData\Roaming\Subversion</configuration>
@@ -165,51 +172,55 @@
     </state>
     <state x="260" y="298" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584156872269" />
     <state x="2267" y="228" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585013301954" />
-    <state width="1921" height="222" key="GridCell.Tab.0.bottom" timestamp="1585020935624">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.0.bottom" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.0.bottom/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935624" />
-    <state width="1268" height="219" key="GridCell.Tab.0.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729748" />
-    <state width="1921" height="222" key="GridCell.Tab.0.center" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.0.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.0.center" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.0.center/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.0.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729748" />
-    <state width="1921" height="222" key="GridCell.Tab.0.left" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.0.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.0.left" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.0.left/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.0.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729747" />
-    <state width="1921" height="222" key="GridCell.Tab.0.right" timestamp="1585020935624">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.0.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.0.right" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.0.right/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935624" />
-    <state width="1268" height="219" key="GridCell.Tab.0.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729748" />
-    <state width="1921" height="222" key="GridCell.Tab.1.bottom" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.0.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.1.bottom" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.1.bottom/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.1.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729747" />
-    <state width="1921" height="222" key="GridCell.Tab.1.center" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.1.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.1.center" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.1.center/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.1.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729747" />
-    <state width="1921" height="222" key="GridCell.Tab.1.left" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.1.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.1.left" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.1.left/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.1.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729747" />
-    <state width="1921" height="222" key="GridCell.Tab.1.right" timestamp="1585020935623">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1264" height="307" key="GridCell.Tab.1.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
+    <state width="1264" height="307" key="GridCell.Tab.1.right" timestamp="1585339939135">
+      <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state width="1921" height="222" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
-    <state width="1268" height="219" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584918729747" />
+    <state width="1264" height="307" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585339939135" />
     <state x="2507" y="-17" key="SettingsEditor" timestamp="1585013307104">
       <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
     <state x="440" y="114" key="SettingsEditor/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584070706590" />
     <state x="2507" y="-17" key="SettingsEditor/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585013307104" />
+    <state x="342" y="209" key="new project wizard" timestamp="1585156394982">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="342" y="209" key="new project wizard/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585156394982" />
     <state x="2863" y="156" width="672" height="678" key="search.everywhere.popup" timestamp="1584898131388">
       <screen x="1920" y="-169" width="2560" height="1440" />
     </state>
@@ -220,47 +231,89 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>50</line>
+          <line>62</line>
           <properties class="com.belinski20.slipdisk.SlipUtils">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java</url>
+          <line>82</line>
+          <properties class="com.belinski20.slipdisk.ProfileUtils" method="getIDCodeFromID">
+=======
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
-          <line>118</line>
+          <line>124</line>
           <properties class="com.belinski20.slipdisk.SlipEvents">
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="23" />
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
-          <line>43</line>
-          <properties class="com.belinski20.slipdisk.SlipEvents" method="onJoin">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java</url>
+          <line>67</line>
+          <properties class="com.belinski20.slipdisk.ProfileUtils" method="truncateUserName">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="25" />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>209</line>
-          <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSigns">
+<<<<<<< HEAD
+          <line>187</line>
+          <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSlipData">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="29" />
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
+<<<<<<< HEAD
+          <line>227</line>
+          <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSigns">
+=======
+          <line>208</line>
+          <properties class="com.belinski20.slipdisk.SlipUtils">
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+=======
+          <line>208</line>
+          <properties class="com.belinski20.slipdisk.SlipUtils">
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="24" />
+          <line>162</line>
+          <properties class="com.belinski20.slipdisk.SlipEvents" method="onPhysicsSignBreak">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java</url>
           <line>84</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Remote">
+        <watch expression="((YamlConfiguration)config).yaml" custom="org.bukkit.configuration.file.YamlConfiguration" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

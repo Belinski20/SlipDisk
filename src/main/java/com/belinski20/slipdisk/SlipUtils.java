@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class SlipUtils{
+class SlipUtils{
 
     private static Plugin plugin;
 
@@ -44,6 +44,18 @@ public class SlipUtils{
     public boolean contains(String userID, Sign sign)
     {
         return sign.getLine(1).equalsIgnoreCase(userID);
+    }
+
+    public boolean fileContains(String userID, Sign sign)
+    {
+        if(getSlips(userID) == null)
+            return false;
+        for(Slip slip: getSlips(userID))
+        {
+            if(slip.getSignLocation().equals(sign.getLocation()))
+                return true;
+        }
+        return false;
     }
 
     public void addSlip(String userID, Location player, Location block) throws IOException {
@@ -79,13 +91,14 @@ public class SlipUtils{
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
-            int j = 0;
-            for(int i = 0; i < config.getConfigurationSection("Slip.slips.").getKeys(false).size(); i++)
+            if(config.getConfigurationSection("Slip.slips") == null)
+                return null;
+            for(String string : config.getConfigurationSection("Slip.slips").getKeys(false))
             {
-                j++;
+                int index = Integer.valueOf(string);
                 Slip sign = new Slip();
-                sign.setSignLocation(getSignLocation(j, config));
-                sign.setPlayerLocation(getPlayerLocation(j, config));
+                sign.setSignLocation(getSignLocation(index, config));
+                sign.setPlayerLocation(getPlayerLocation(index, config));
                 slips.add(sign);
             }
         }
@@ -187,6 +200,11 @@ public class SlipUtils{
 
         for(File slipFile : files)
         {
+            if(userID.equals(newUserID))
+            {
+                updateSigns(newUserID);
+                return;
+            }
             if(slipFile.getName().equals(userID + ".yml"))
             {
                 config = YamlConfiguration.loadConfiguration(slipFile);
@@ -207,23 +225,29 @@ public class SlipUtils{
         config.save(file);
     }
 
-    private void updateSigns(String userID)
-    {
+    private void updateSigns(String userID) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
 
         int j = 0;
-        for(int index = 0; index < config.getConfigurationSection("Slip.slips").getKeys(false).size(); index++)
+        if(!config.contains("Slip.slips"))
+            return;
+        for(int i = 0; i < config.getConfigurationSection("Slip.slips").getKeys(false).size(); i++)
         {
             j++;
             int x = (int)config.get("Slip.slips." + j + ".x");
             int y = (int)config.get("Slip.slips." + j + ".y");
             int z = (int)config.get("Slip.slips." + j + ".z");
             String w = (String)config.get("Slip.slips." + j + ".w");
-            Sign sign = (Sign)plugin.getServer().getWorld(w).getBlockAt(x, y, z).getState();
-            sign.setLine(1, userID);
-            sign.update();
+            if(plugin.getServer().getWorld(w).getBlockAt(x, y, z).getState() instanceof Sign)
+            {
+                Sign sign = (Sign)plugin.getServer().getWorld(w).getBlockAt(x, y, z).getState();
+                sign.setLine(1, userID);
+                sign.update();
+            }
+            else
+                removeSlip(getSignLocation(j, config), userID);
         }
     }
 
@@ -253,6 +277,21 @@ public class SlipUtils{
         return totalAmountSlips;
     }
 
+    public int getCurrentSlipAmount(String userID)
+    {
+        FileConfiguration config;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+
+        int currentAmountSlips = 0;
+        if(file.exists())
+        {
+            config = YamlConfiguration.loadConfiguration(file);
+
+            currentAmountSlips = (int)config.get("Slip.Amount");
+        }
+        return currentAmountSlips;
+    }
+
     public boolean hasMaxSlips(String userID)
     {
         FileConfiguration config;
@@ -267,5 +306,40 @@ public class SlipUtils{
             return !(currentAmountSlips < totalAmountSlips);
         }
         return true;
+    }
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public Location getNextSignLocation(String userID, Location location)
+    {
+        ArrayList<Slip> slips = getSlips(userID);
+        for(int i = 0; i < slips.size(); i++)
+        {
+            if(slips.get(i).getSignLocation().equals(location))
+            {
+                if(i == slips.size()-1)
+                {
+                    return slips.get(0).getSignLocation();
+                }
+                else
+                    return slips.get(i+1).getSignLocation();
+            }
+        }
+        return null;
+=======
+=======
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+    public boolean slipExists(String userID) {
+        if(userID == "")
+            return false;
+        FileConfiguration config;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        if(!file.exists())
+            return false;
+        return true;
+<<<<<<< HEAD
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
+=======
+>>>>>>> eb6d693684dbb1e9dc4181d7c72da25530d5fd92
     }
 }
