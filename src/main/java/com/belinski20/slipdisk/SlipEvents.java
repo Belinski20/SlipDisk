@@ -89,21 +89,14 @@ class SlipEvents implements Listener {
         if(event.getBlock().getState() instanceof Sign)
         {
             Sign sign = (Sign)event.getBlock().getState();
-            String userID = profileUtils.getUserID(event.getPlayer().getUniqueId());
+            String userID = sign.getLine(1);
             if(!sign.getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
                 return;
-            if(slipUtils.contains(userID, (Sign)event.getBlock().getState()))
+            if(slipUtils.fileContains(userID, (Sign)event.getBlock().getState()))
             {
                 removeSlip(userID, event);
                 return;
             }
-            if(!slipUtils.fileContains(userID, (Sign)event.getBlock().getState()))
-            {
-                removeSlip(userID, event);
-                return;
-            }
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.RED + "This Slip is Not Yours!");
         }
     }
 
@@ -136,38 +129,14 @@ class SlipEvents implements Listener {
     }
 
     @EventHandler
-    public void onSignBreak(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        boolean hasSlip = false;
-        boolean hasBlock = false;
-        for(BlockFace side: SIDES)
-        {
-            Block sideBlock = block.getRelative(side);
-            if(sideBlock.getState() instanceof Sign)
-            {
-                hasSlip = true;
-            }
-            else if(!sideBlock.getType().equals(Material.AIR))
-            {
-                hasBlock = true;
-            }
-        }
-        if(!hasBlock && hasSlip)
-        {
-            event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.DARK_RED + "A Slip Is Connected to This Block!");
-        }
-    }
-
-    @EventHandler
     public void onPhysicsSignBreak(BlockPhysicsEvent event) throws IOException {
         WallSign wallSign = null;
         Sign sign;
         BlockFace attached;
-        Block attachedTo = null;
+        Block attachedTo;
         Block block = event.getBlock();
         Block sourceBlock = event.getSourceBlock();
-        if(sourceBlock.getState() instanceof Sign)
+        if(sourceBlock.getType() != Material.AIR)
             return;
 
         if(!(block.getState() instanceof Sign))
@@ -186,6 +155,12 @@ class SlipEvents implements Listener {
                 attached = wallSign.getFacing().getOppositeFace();
                 attachedTo = block.getRelative(attached);
                 if(attachedTo.getType() != Material.AIR)
+                    return;
+            }
+            else
+            {
+                Block under = block.getRelative(BlockFace.DOWN);
+                if(under.getType() != Material.AIR)
                     return;
             }
         }
