@@ -129,7 +129,7 @@ class SlipEvents implements Listener {
 
         String userID = slipUtils.getUserIDFromSign(sign);
 
-        if(slipUtils.contains(userID, sign))
+        if(slipUtils.fileContains(userID, sign))
             event.getPlayer().teleport(slipUtils.nextTeleport(userID, event.getClickedBlock().getLocation()));
         else
             event.getPlayer().sendMessage(ChatColor.RED + "This slip is Un-Registered. Please Break.");
