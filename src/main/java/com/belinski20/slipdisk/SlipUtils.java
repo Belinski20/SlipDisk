@@ -317,7 +317,7 @@ class SlipUtils{
             {
                 Sign sign = (Sign)block.getState();
                 if(sign.getLine(1).equals(userID))
-                    return;
+                    continue;
             }
                 removeSlip(slip.getSignLocation(), userID);
         }
