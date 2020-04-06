@@ -57,6 +57,7 @@ class SlipEvents implements Listener {
             {
                 slipUtils.updateSlipData(event.getPlayer().getUniqueId(), userID);
             }
+            slipUtils.checkSlipsExist(userID);
             return;
         }
         plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Player File and Slip File not Updated or Made for " + player.getName());

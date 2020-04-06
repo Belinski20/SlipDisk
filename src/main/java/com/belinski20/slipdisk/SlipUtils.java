@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -308,27 +309,17 @@ class SlipUtils{
         return true;
     }
 
-
-    public Location getNextSignLocation(String userID, Location location) {
-        ArrayList<Slip> slips = getSlips(userID);
-        for (int i = 0; i < slips.size(); i++) {
-            if (slips.get(i).getSignLocation().equals(location)) {
-                if (i == slips.size() - 1) {
-                    return slips.get(0).getSignLocation();
-                } else
-                    return slips.get(i + 1).getSignLocation();
+    public void checkSlipsExist(String userID) throws IOException {
+        for(Slip slip : getSlips(userID))
+        {
+            Block block = slip.getSignLocation().getBlock();
+            if(block.getState() instanceof Sign)
+            {
+                Sign sign = (Sign)block.getState();
+                if(sign.getLine(1).equals(userID))
+                    return;
             }
+                removeSlip(slip.getSignLocation(), userID);
         }
-        return null;
-    }
-
-    public boolean slipExists(String userID) {
-        if(userID == "")
-            return false;
-        FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
-        if(!file.exists())
-            return false;
-        return true;
     }
 }
