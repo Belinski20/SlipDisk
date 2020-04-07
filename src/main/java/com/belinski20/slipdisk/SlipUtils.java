@@ -310,6 +310,8 @@ class SlipUtils{
     }
 
     public void checkSlipsExist(String userID) throws IOException {
+        if(getSlips(userID) == null)
+            return;
         for(Slip slip : getSlips(userID))
         {
             Block block = slip.getSignLocation().getBlock();

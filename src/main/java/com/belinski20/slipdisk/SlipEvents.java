@@ -74,7 +74,6 @@ class SlipEvents implements Listener {
             slipUtils.addSlip(profileUtils.getUserID(player.getUniqueId()), player.getLocation(), event.getBlock().getLocation());
             event.setLine(0, ChatColor.DARK_RED + "Slip");
             event.setLine(1, userID);
-            profileUtils.increaseSlipAmount();
             player.sendMessage(ChatColor.GOLD + "Created a New Slip Gate (" + slipUtils.getCurrentSlipAmount(userID) + " of " + slipUtils.getMaxSlip(userID) + ")");
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + player.getName() +  " created a new slip gate!");
         }

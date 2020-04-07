@@ -113,31 +113,4 @@ class ProfileUtils{
        File[] files = file.listFiles();
        return files;
     }
-
-    public void increaseSlipAmount() {
-    }
-
-    public String getRank(UUID uuid)
-    {
-        FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
-        if(file.exists())
-        {
-            config = YamlConfiguration.loadConfiguration(file);
-            return (String)config.get("Player.Rank");
-        }
-        return "";
-    }
-
-    public String transferFix(String userID)
-    {
-        FileConfiguration config;
-        for(File file: getProfileFiles())
-        {
-            config = YamlConfiguration.loadConfiguration(file);
-            if(config.get("Player.Name").equals(userID))
-                return (String)config.get("Player.SlipID");
-        }
-        return null;
-    }
 }
