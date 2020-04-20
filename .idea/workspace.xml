@@ -5,12 +5,33 @@
       <artifact name="SlipDisk:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="635aa84f-e985-46c7-8e55-80be489942c9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_15_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SlipDisk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SlipDisk.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +60,14 @@
   <component name="ProjectId" id="1Yu7TruW6TPRQUYwawKYUQwuWud" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.15.2-R0.1-SNAPSHOT" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Vault.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33948717" />
@@ -98,18 +119,6 @@
       <item itemvalue="Remote.Unnamed" />
     </list>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\Belinski20\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
@@ -129,13 +138,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2792" y="209" key="#Auto_Import" timestamp="1584305999139">
@@ -157,9 +165,10 @@
     </state>
     <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584828826446" />
     <state x="2840" y="212" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1584934905938" />
-    <state x="2267" y="228" key="FileChooserDialogImpl" timestamp="1585013301954">
-      <screen x="1920" y="-169" width="2560" height="1440" />
+    <state x="667" y="335" key="FileChooserDialogImpl" timestamp="1587356798960">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
+    <state x="667" y="335" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587356798960" />
     <state x="260" y="298" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584156872269" />
     <state x="2267" y="228" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585013301954" />
     <state width="2561" height="432" key="GridCell.Tab.0.bottom" timestamp="1586231971265">
@@ -202,9 +211,10 @@
     </state>
     <state width="1921" height="222" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state x="2507" y="-17" key="SettingsEditor" timestamp="1585013307104">
-      <screen x="1920" y="-169" width="2560" height="1440" />
+    <state x="587" y="152" key="SettingsEditor" timestamp="1587356803981">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
+    <state x="587" y="152" key="SettingsEditor/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587356803981" />
     <state x="440" y="114" key="SettingsEditor/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584070706590" />
     <state x="2507" y="-17" key="SettingsEditor/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585013307104" />
     <state x="342" y="209" key="new project wizard" timestamp="1585156394982">

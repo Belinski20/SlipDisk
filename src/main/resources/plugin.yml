@@ -7,7 +7,7 @@ description: Close to vanilla teleport plugin
 depend: [Vault]
 
 commands:
-  slipdisk:
+  slip:
     permission-message: Do not have valid permissions to use
     description: Gives Description of what slipdisk is
     permission: slipdisk.slip

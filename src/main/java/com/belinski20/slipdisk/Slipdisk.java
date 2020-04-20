@@ -65,7 +65,7 @@ public final class Slipdisk extends JavaPlugin {
             return false;
         }
         final Player player = (Player)sender;
-        if (cmd.getName().equalsIgnoreCase("slipdisk")) {
+        if (cmd.getName().equalsIgnoreCase("slip")) {
             player.sendMessage("");
             player.sendMessage(ChatColor.GOLD
                     + "Slipdisk is a Spinalcraft-exclusive plugin that allows "
@@ -84,6 +84,8 @@ public final class Slipdisk extends JavaPlugin {
         }
         if(cmd.getName().equalsIgnoreCase("update"))
         {
+            player.sendMessage(ChatColor.GREEN + "Started to update player ranks...");
+            int count = 0;
             for(Player players : getServer().getOnlinePlayers())
             {
                 String rank = permissionIntegration.getUserRank(players);
@@ -91,11 +93,13 @@ public final class Slipdisk extends JavaPlugin {
                 try {
                     profileUtils.updateRank(players, rank, total);
                     slipUtils.updateSlipFile(profileUtils.getUserID(players.getUniqueId()), total);
+                    count += 1;
                 } catch (IOException e) {
                     getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Update Command Error! Error Below");
                     e.printStackTrace();
                     getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "End of Update Command Error!");            }
             }
+            player.sendMessage(ChatColor.GOLD + "" + count + " players updated!");
             return true;
         }
         else
