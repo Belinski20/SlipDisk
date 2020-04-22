@@ -122,9 +122,20 @@ class SlipEvents implements Listener {
         String userID = slipUtils.getUserIDFromSign(sign);
 
         if(slipUtils.fileContains(userID, sign))
+        {
+            if(slipUtils.getCurrentSlipAmount(userID) == 1)
+            {
+                event.getPlayer().sendMessage(ChatColor.RED + "This slip has nowhere to go!");
+                return;
+            }
             event.getPlayer().teleport(slipUtils.nextTeleport(userID, event.getClickedBlock().getLocation()));
+        }
         else
-            event.getPlayer().sendMessage(ChatColor.RED + "This slip is not registered in the new version of SlipDisk");
+        {
+            event.getPlayer().sendMessage(ChatColor.RED + "This slip is not registered in this version of SlipDisk");
+            event.getClickedBlock().getWorld().createExplosion(event.getClickedBlock().getLocation(), 0, false);
+            event.getClickedBlock().breakNaturally();
+        }
     }
 
     @EventHandler

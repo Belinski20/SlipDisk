@@ -1,9 +1,9 @@
 name: Slipdisk
-version: 1.0
+version: 1.8
 main: com.belinski20.slipdisk.Slipdisk
 api-version: 1.15
 authors: [belinski20]
-description: Close to vanilla teleport plugin
+description: A SpinalCraft exclusive plugin for a close to vanilla teleportation system
 depend: [Vault]
 
 commands:
