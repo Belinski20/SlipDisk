@@ -3,7 +3,7 @@ version: ${project.version}
 main: com.belinski20.slipdisk.Slipdisk
 api-version: 1.15
 authors: [belinski20]
-description: Close to vanilla teleport plugin
+description: A SpinalCraft exclusive plugin for a close to vanilla teleportation system
 depend: [Vault]
 
 commands:

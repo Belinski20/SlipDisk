@@ -24,6 +24,12 @@ class SlipUtils{
         SlipUtils.plugin = plugin;
     }
 
+    /**
+     * Create a File for Users which contains their slips
+     * @param userID
+     * @param rank
+     * @throws IOException
+     */
     public void createUserSlipFile(String userID, String rank) throws IOException {
         FileConfiguration config;
         FileConfiguration rankConfig;
@@ -42,11 +48,23 @@ class SlipUtils{
         }
     }
 
+    /**
+     * Checks to see if a sign contains a given UserID
+     * @param userID
+     * @param sign
+     * @return
+     */
     public boolean contains(String userID, Sign sign)
     {
         return sign.getLine(1).equalsIgnoreCase(userID);
     }
 
+    /**
+     * Checks to see if a sign exists in a user file
+     * @param userID
+     * @param sign
+     * @return
+     */
     public boolean fileContains(String userID, Sign sign)
     {
         if(getSlips(userID) == null)
@@ -59,6 +77,13 @@ class SlipUtils{
         return false;
     }
 
+    /**
+     * Adds a slip entry into the user file
+     * @param userID
+     * @param player
+     * @param block
+     * @throws IOException
+     */
     public void addSlip(String userID, Location player, Location block) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
@@ -84,6 +109,11 @@ class SlipUtils{
         }
     }
 
+    /**
+     * Gets a list of slips from the user file
+     * @param userID
+     * @return
+     */
     private ArrayList<Slip> getSlips(String userID)
     {
         ArrayList<Slip> slips = new ArrayList<>();
@@ -106,28 +136,46 @@ class SlipUtils{
         return slips;
     }
 
+    /**
+     * Gets the location of a slip from a user file
+     * @param index
+     * @param config
+     * @return
+     */
     private Location getSignLocation(int index, FileConfiguration config)
     {
-        int x = (int)config.get("Slip.slips." + index + ".x");
-        int y = (int)config.get("Slip.slips." + index + ".y");
-        int z = (int)config.get("Slip.slips." + index + ".z");
-        String w = (String)config.get("Slip.slips." + index + ".w");
+        int x = config.getInt("Slip.slips." + index + ".x");
+        int y = config.getInt("Slip.slips." + index + ".y");
+        int z = config.getInt("Slip.slips." + index + ".z");
+        String w = config.getString("Slip.slips." + index + ".w");
         World world = Bukkit.getWorld(w);
         return new Location(world, x, y, z);
     }
 
+    /**
+     * Gets the player location from a user file
+     * @param index
+     * @param config
+     * @return
+     */
     private Location getPlayerLocation(int index, FileConfiguration config)
     {
-        double x = (double)config.get("Slip.slips." + index + ".px");
-        double y = (double)config.get("Slip.slips." + index + ".py");
-        double z = (double)config.get("Slip.slips." + index + ".pz");
-        double pitch = (double)config.get("Slip.slips." + index + ".ppitch");
-        double yaw = (double)config.get("Slip.slips." + index + ".pyaw");
+        double x = config.getDouble("Slip.slips." + index + ".px");
+        double y = config.getDouble("Slip.slips." + index + ".py");
+        double z = config.getDouble("Slip.slips." + index + ".pz");
+        double pitch = config.getDouble("Slip.slips." + index + ".ppitch");
+        double yaw = config.getDouble("Slip.slips." + index + ".pyaw");
         String w = (String)config.get("Slip.slips." + index + ".w");
         World world = Bukkit.getWorld(w);
         return new Location(world, x, y, z, (float)yaw, (float)pitch);
     }
 
+    /**
+     * Removes a given slip from a location from a user file
+     * @param location
+     * @param userID
+     * @throws IOException
+     */
     public void removeSlip(Location location, String userID) throws IOException {
         ArrayList<Slip> slips = getSlips(userID);
         Slip slipToRemove = new Slip();
@@ -144,6 +192,12 @@ class SlipUtils{
         }
     }
 
+    /**
+     * Gets the next location which the player will be teleported to
+     * @param userID
+     * @param location
+     * @return
+     */
     public Location nextTeleport(String userID, Location location)
     {
         ArrayList<Slip> slips = getSlips(userID);
@@ -162,6 +216,12 @@ class SlipUtils{
         return null;
     }
 
+    /**
+     * Fixes the numbering of the slips in the slip file.
+     * @param userID
+     * @param remainingSlips
+     * @throws IOException
+     */
     private void fixSlips(String userID, ArrayList<Slip> remainingSlips) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
@@ -178,6 +238,11 @@ class SlipUtils{
         }
     }
 
+    /**
+     * Sets the amount of slips in a user slip file to zero
+     * @param userID
+     * @throws IOException
+     */
     private void setAmountZero(String userID) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
@@ -186,34 +251,31 @@ class SlipUtils{
         config.save(file);
     }
 
-    public void updateSlipData(UUID uuid, String userID) throws IOException {
+    /**
+     * Updates the slip signs for a player if a name change happens
+     * @param oldUserID
+     * @throws IOException
+     */
+    public void updateSlipData(String oldUserID, String newUserID) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
-        String newUserID = "";
 
-        if(file.exists())
+        if(!oldUserID.equals(newUserID))
         {
-            config = YamlConfiguration.loadConfiguration(file);
-            newUserID = (String)config.get("Player.SlipID");
-        }
+            updateSigns(newUserID);
 
-        File[] files = getSlipFiles();
+            File[] files = getSlipFiles();
 
-        for(File slipFile : files)
-        {
-            if(userID.equals(newUserID))
+            for(File slipFile : files)
             {
-                updateSigns(newUserID);
-                return;
-            }
-            if(slipFile.getName().equals(userID + ".yml"))
-            {
-                config = YamlConfiguration.loadConfiguration(slipFile);
-                File newFile = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + newUserID + ".yml");
-                slipFile.renameTo(newFile);
-                config.save(slipFile);
-                slipFile.delete();
-                updateSigns(newUserID);
+                if(!slipFile.getName().equals(oldUserID + ".yml"))
+                {
+                    config = YamlConfiguration.loadConfiguration(slipFile);
+                    File newFile = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + newUserID + ".yml");
+                    slipFile.renameTo(newFile);
+                    config.save(slipFile);
+                    slipFile.delete();
+                    updateSigns(newUserID);
+                }
             }
         }
     }
@@ -226,6 +288,11 @@ class SlipUtils{
         config.save(file);
     }
 
+    /**
+     * Updates the slip of a given user if there was a name change and changes name on the sign to reflect change
+     * @param userID
+     * @throws IOException
+     */
     private void updateSigns(String userID) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
@@ -237,9 +304,9 @@ class SlipUtils{
         for(int i = 0; i < config.getConfigurationSection("Slip.slips").getKeys(false).size(); i++)
         {
             j++;
-            int x = (int)config.get("Slip.slips." + j + ".x");
-            int y = (int)config.get("Slip.slips." + j + ".y");
-            int z = (int)config.get("Slip.slips." + j + ".z");
+            int x = config.getInt("Slip.slips." + j + ".x");
+            int y = config.getInt("Slip.slips." + j + ".y");
+            int z = config.getInt("Slip.slips." + j + ".z");
             String w = (String)config.get("Slip.slips." + j + ".w");
             if(plugin.getServer().getWorld(w).getBlockAt(x, y, z).getState() instanceof Sign)
             {
@@ -252,17 +319,31 @@ class SlipUtils{
         }
     }
 
+    /**
+     * Gets the user User ID from a sign
+     * @param sign
+     * @return
+     */
     public String getUserIDFromSign(Sign sign)
     {
         return sign.getLine(1);
     }
 
+    /**
+     * Gets a list of all slip files
+     * @return
+     */
     private File[] getSlipFiles()
     {
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips", "");
         return file.listFiles();
     }
 
+    /**
+     * Gets the max amount of slips that a player can have
+     * @param userID
+     * @return
+     */
     public int getMaxSlip(String userID)
     {
         FileConfiguration config;
@@ -278,6 +359,11 @@ class SlipUtils{
         return totalAmountSlips;
     }
 
+    /**
+     * Get the current amount of slips that a player has
+     * @param userID
+     * @return
+     */
     public int getCurrentSlipAmount(String userID)
     {
         FileConfiguration config;
@@ -288,11 +374,16 @@ class SlipUtils{
         {
             config = YamlConfiguration.loadConfiguration(file);
 
-            currentAmountSlips = (int)config.get("Slip.Amount");
+            currentAmountSlips = config.getInt("Slip.Amount");
         }
         return currentAmountSlips;
     }
 
+    /**
+     * Checks to see if a player has the total amount of slips
+     * @param userID
+     * @return
+     */
     public boolean hasMaxSlips(String userID)
     {
         FileConfiguration config;
@@ -302,13 +393,18 @@ class SlipUtils{
         {
             config = YamlConfiguration.loadConfiguration(file);
 
-            int totalAmountSlips = (int)config.get("Slip.Total");
-            int currentAmountSlips = (int)config.get("Slip.Amount");
+            int totalAmountSlips = config.getInt("Slip.Total");
+            int currentAmountSlips = config.getInt("Slip.Amount");
             return !(currentAmountSlips < totalAmountSlips);
         }
         return true;
     }
 
+    /**
+     * Checks to see if the slip exists if not then it removes it.
+     * @param userID
+     * @throws IOException
+     */
     public void checkSlipsExist(String userID) throws IOException {
         if(getSlips(userID) == null)
             return;

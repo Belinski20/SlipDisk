@@ -6,12 +6,12 @@
 
     <groupId>com.belinski20</groupId>
     <artifactId>slipdisk</artifactId>
-    <version>1.0</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>Slipdisk</name>
 
-    <description>Close to vanilla teleport plugin</description>
+    <description>A SpinalCraft exclusive plugin for a close to vanilla teleportation system</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

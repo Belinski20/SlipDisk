@@ -42,7 +42,7 @@ class PermissionIntegration {
     }
 
     public void createRankFile() throws IOException {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
 
         if(!rankFile.exists())
@@ -64,7 +64,7 @@ class PermissionIntegration {
         config = YamlConfiguration.loadConfiguration(rankFile);
         if(config.get("Ranks." + rank) != null)
         {
-            int total = (int)config.get("Ranks." + rank);
+            int total = config.getInt("Ranks." + rank);
             return total;
         }
         plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Rank (" + rank + ") not found in Ranks.yml!");

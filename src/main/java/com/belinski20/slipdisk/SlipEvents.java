@@ -34,14 +34,6 @@ class SlipEvents implements Listener {
         this.plugin = plugin;
     }
 
-    private static final BlockFace[] SIDES = new BlockFace[] {
-            BlockFace.UP,
-            BlockFace.NORTH,
-            BlockFace.SOUTH,
-            BlockFace.WEST,
-            BlockFace.EAST
-    };
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException
     {
@@ -51,11 +43,11 @@ class SlipEvents implements Listener {
         if(slipTotal != -1)
         {
             profileUtils.createPlayerFile(player, rank, slipTotal);
-            String userID = profileUtils.getUserID(event.getPlayer().getUniqueId());
+            String userID = profileUtils.getUserID(player.getUniqueId());
             slipUtils.createUserSlipFile(userID, rank);
-            if(profileUtils.resetInformation(event.getPlayer()))
+            if(profileUtils.resetInformation(player))
             {
-                slipUtils.updateSlipData(event.getPlayer().getUniqueId(), userID);
+                slipUtils.updateSlipData(userID, profileUtils.generateUserID(player));
             }
             slipUtils.checkSlipsExist(userID);
             return;
@@ -100,6 +92,13 @@ class SlipEvents implements Listener {
         }
     }
 
+
+    /**
+     * Removes the slip for a player
+     * @param userID
+     * @param event
+     * @throws IOException
+     */
     private void removeSlip(String userID, BlockBreakEvent event) throws IOException {
         if(slipUtils.fileContains(userID, (Sign)event.getBlock().getState()))
             slipUtils.removeSlip(event.getBlock().getLocation(), userID);
@@ -125,7 +124,7 @@ class SlipEvents implements Listener {
         if(slipUtils.fileContains(userID, sign))
             event.getPlayer().teleport(slipUtils.nextTeleport(userID, event.getClickedBlock().getLocation()));
         else
-            event.getPlayer().sendMessage(ChatColor.RED + "This slip is Un-Registered. Please Break.");
+            event.getPlayer().sendMessage(ChatColor.RED + "This slip is not registered in the new version of SlipDisk");
     }
 
     @EventHandler
@@ -133,7 +132,6 @@ class SlipEvents implements Listener {
         WallSign wallSign = null;
         Sign sign;
         BlockFace attached;
-        Block attachedTo;
         Block block = event.getBlock();
         Block sourceBlock = event.getSourceBlock();
         if(sourceBlock.getType() != Material.AIR)
@@ -153,7 +151,7 @@ class SlipEvents implements Listener {
             if(wallSign != null)
             {
                 attached = wallSign.getFacing().getOppositeFace();
-                attachedTo = block.getRelative(attached);
+                Block attachedTo = block.getRelative(attached);
                 if(attachedTo.getType() != Material.AIR)
                     return;
             }

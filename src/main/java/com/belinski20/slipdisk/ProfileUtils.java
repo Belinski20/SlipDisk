@@ -44,13 +44,20 @@ class ProfileUtils{
             if(config.get("Player.Name") != player.getName())
             {
                 config.set("Player.Name", player.getName());
-                String oldSlipID = String.valueOf(config.get("Player.SlipID"));
-                config.set("Player.SlipID", appendOldCode(truncateUserName(player.getName()), oldSlipID));
+                config.set("Player.SlipID", appendOldCode(truncateUserName(player.getName()), config.getString("Player.SlipID")));
                 config.save(file);
                 return true;
             }
         }
         return false;
+    }
+
+    public String generateUserID(Player player)
+    {
+        FileConfiguration config;
+        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        config = YamlConfiguration.loadConfiguration(file);
+        return appendOldCode(truncateUserName(player.getName()), config.getString("Player.SlipID"));
     }
 
     public void updateRank(Player player, String rank, int slipTotal) throws IOException {
@@ -95,14 +102,19 @@ class ProfileUtils{
         return username + getIDCodeFromID(oldID);
     }
 
+    /**
+     * Gets the User ID from the user uuid file
+     * @param uuid
+     * @return
+     */
     public String getUserID(UUID uuid)
     {
-        FileConfiguration config = null;
+        FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
-            return (String)config.get("Player.SlipID");
+            return config.getString("Player.SlipID");
         }
         return "";
     }
