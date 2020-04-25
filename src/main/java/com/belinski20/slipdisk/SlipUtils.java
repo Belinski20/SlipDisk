@@ -37,9 +37,8 @@ class SlipUtils{
         File rankFile = new File("plugins" + File.separator + "slipdisk"  + File.separator + "Ranks.yml");
         rankConfig = YamlConfiguration.loadConfiguration(rankFile);
         int slipTotal = (int)rankConfig.get("Ranks." + rank);
-        if(!file.exists())
+        if(file.createNewFile())
         {
-            file.createNewFile();
             config = YamlConfiguration.loadConfiguration(file);
             config.set("Slip.Total", slipTotal);
             config.set("Slip.Amount", 0);
@@ -256,28 +255,25 @@ class SlipUtils{
      * @param oldUserID
      * @throws IOException
      */
-    public void updateSlipData(String oldUserID, String newUserID) throws IOException {
-        FileConfiguration config;
+    public boolean updateSlipData(String oldUserID, String newUserID) throws IOException {
 
         if(!oldUserID.equals(newUserID))
         {
             updateSigns(newUserID);
 
-            File[] files = getSlipFiles();
-
-            for(File slipFile : files)
+            for(File slipFile : getSlipFiles())
             {
                 if(!slipFile.getName().equals(oldUserID + ".yml"))
                 {
-                    config = YamlConfiguration.loadConfiguration(slipFile);
+                    plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Renaming File from " + oldUserID + ".yml to " + newUserID + ".yml!");
                     File newFile = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + newUserID + ".yml");
                     slipFile.renameTo(newFile);
-                    config.save(slipFile);
-                    slipFile.delete();
                     updateSigns(newUserID);
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public void updateSlipFile(String userID, int total) throws IOException {

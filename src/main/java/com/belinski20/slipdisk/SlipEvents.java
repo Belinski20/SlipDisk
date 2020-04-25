@@ -40,6 +40,7 @@ class SlipEvents implements Listener {
         Player player = event.getPlayer();
         String rank = permissionIntegration.getUserRank(player);
         int slipTotal = permissionIntegration.getSlipTotal(rank);
+
         if(slipTotal != -1)
         {
             profileUtils.createPlayerFile(player, rank, slipTotal);
@@ -47,7 +48,14 @@ class SlipEvents implements Listener {
             slipUtils.createUserSlipFile(userID, rank);
             if(profileUtils.resetInformation(player))
             {
-                slipUtils.updateSlipData(userID, profileUtils.generateUserID(player));
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + player.getName() + " had a name change!");
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Updating slips for " + player.getName());
+                if(slipUtils.updateSlipData(userID, profileUtils.generateUserID(player)))
+                {
+                    plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Successful file update!");
+                }
+                else
+                    plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "File did not update! Could be a bug!");
             }
             slipUtils.checkSlipsExist(userID);
             return;
@@ -86,6 +94,7 @@ class SlipEvents implements Listener {
                 return;
             if(slipUtils.fileContains(userID, (Sign)event.getBlock().getState()))
             {
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "A slip for userID was broken!");
                 removeSlip(userID, event);
                 return;
             }

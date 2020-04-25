@@ -26,8 +26,9 @@
   <component name="ChangeListManager">
     <list default="true" id="635aa84f-e985-46c7-8e55-80be489942c9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,52 +171,60 @@
     <state x="667" y="335" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587356798960" />
     <state x="260" y="298" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1584156872269" />
     <state x="2267" y="228" key="FileChooserDialogImpl/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1585013301954" />
-    <state width="1877" height="127" key="GridCell.Tab.0.bottom" timestamp="1587427819752">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.0.bottom" timestamp="1587845444288">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819752" />
+    <state width="1232" height="452" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845444288" />
     <state width="1921" height="222" key="GridCell.Tab.0.bottom/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935624" />
     <state width="2561" height="432" key="GridCell.Tab.0.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.0.center" timestamp="1587427819751">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.0.center" timestamp="1587845444287">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819751" />
+    <state width="1232" height="452" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845444287" />
     <state width="1921" height="222" key="GridCell.Tab.0.center/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.0.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.0.left" timestamp="1587427819751">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.0.left" timestamp="1587845444287">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819751" />
+    <state width="1232" height="452" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845444287" />
     <state width="1921" height="222" key="GridCell.Tab.0.left/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.0.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.0.right" timestamp="1587427819752">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.0.right" timestamp="1587845444287">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819752" />
+    <state width="1232" height="452" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845444287" />
     <state width="1921" height="222" key="GridCell.Tab.0.right/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935624" />
     <state width="2561" height="432" key="GridCell.Tab.0.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.1.bottom" timestamp="1587427819753">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.1.bottom" timestamp="1587845447560">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.1.bottom/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819753" />
+    <state width="1232" height="452" key="GridCell.Tab.1.bottom/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845447560" />
     <state width="1921" height="222" key="GridCell.Tab.1.bottom/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.1.bottom/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.1.center" timestamp="1587427819752">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.1.center" timestamp="1587845447560">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.1.center/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819752" />
+    <state width="1232" height="452" key="GridCell.Tab.1.center/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845447560" />
     <state width="1921" height="222" key="GridCell.Tab.1.center/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.1.center/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.1.left" timestamp="1587427819752">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.1.left" timestamp="1587845447560">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.1.left/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819752" />
+    <state width="1232" height="452" key="GridCell.Tab.1.left/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845447560" />
     <state width="1921" height="222" key="GridCell.Tab.1.left/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.1.left/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
-    <state width="1877" height="127" key="GridCell.Tab.1.right" timestamp="1587427819752">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1232" height="452" key="GridCell.Tab.1.right" timestamp="1587845447560">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1877" height="127" key="GridCell.Tab.1.right/0.0.2560.1440/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587427819752" />
+    <state width="1232" height="452" key="GridCell.Tab.1.right/0.0.2560.1440/-1920.0.1920.1040@0.0.2560.1440" timestamp="1587845447560" />
     <state width="1921" height="222" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@0.0.1920.1080" timestamp="1585020935623" />
     <state width="2561" height="432" key="GridCell.Tab.1.right/1920.-169.2560.1440/0.0.1920.1080@1920.-169.2560.1440" timestamp="1586231971265" />
     <state x="587" y="152" key="SettingsEditor" timestamp="1587527010362">
@@ -239,7 +248,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>88</line>
+          <line>87</line>
           <properties class="com.belinski20.slipdisk.SlipUtils">
             <option name="EMULATED" value="true" />
           </properties>
@@ -247,7 +256,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>407</line>
+          <line>403</line>
           <properties class="com.belinski20.slipdisk.SlipUtils" method="checkSlipsExist">
             <option name="EMULATED" value="true" />
           </properties>
@@ -255,7 +264,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>386</line>
+          <line>382</line>
           <properties class="com.belinski20.slipdisk.SlipUtils" method="hasMaxSlips">
             <option name="EMULATED" value="true" />
           </properties>
@@ -263,11 +272,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
-          <line>366</line>
+          <line>362</line>
           <properties class="com.belinski20.slipdisk.SlipUtils" method="getCurrentSlipAmount">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
+          <line>257</line>
+          <properties class="com.belinski20.slipdisk.SlipUtils" method="updateSlipData">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/ProfileUtils.java</url>
+          <line>36</line>
+          <properties class="com.belinski20.slipdisk.ProfileUtils" method="resetInformation">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Slipdisk.java</url>
@@ -281,8 +306,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
-          <line>63</line>
+          <line>71</line>
           <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipUtils.java</url>
+          <line>265</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -22,9 +22,8 @@ class ProfileUtils{
     public void createPlayerFile(Player player, String rank, int slipTotal) throws IOException {
         FileConfiguration config;
         File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
-        if(!file.exists())
+        if(file.createNewFile())
         {
-            file.createNewFile();
             config = YamlConfiguration.loadConfiguration(file);
             config.set("Player.Name", player.getName());
             config.set("Player.Rank", rank);
@@ -41,7 +40,8 @@ class ProfileUtils{
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
-            if(config.get("Player.Name") != player.getName())
+            String currentUserName = config.getString("Player.Name");
+            if(!currentUserName.equals(player.getName()))
             {
                 config.set("Player.Name", player.getName());
                 config.set("Player.SlipID", appendOldCode(truncateUserName(player.getName()), config.getString("Player.SlipID")));
