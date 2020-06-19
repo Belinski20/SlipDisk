@@ -21,7 +21,7 @@ class ProfileUtils{
 
     public void createPlayerFile(Player player, String rank, int slipTotal) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        File file = new File(plugin.getDataFolder(), "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.createNewFile())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -36,7 +36,7 @@ class ProfileUtils{
 
     public boolean resetInformation(Player player) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        File file = new File(plugin.getDataFolder(), "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -55,14 +55,14 @@ class ProfileUtils{
     public String generateUserID(Player player)
     {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        File file = new File(plugin.getDataFolder(), "users" + File.separator + player.getUniqueId() + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
         return appendOldCode(truncateUserName(player.getName()), config.getString("Player.SlipID"));
     }
 
     public void updateRank(Player player, String rank, int slipTotal) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + player.getUniqueId() + ".yml");
+        File file = new File(plugin.getDataFolder(), "users" + File.separator + player.getUniqueId() + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -110,7 +110,7 @@ class ProfileUtils{
     public String getUserID(UUID uuid)
     {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users" + File.separator + uuid + ".yml");
+        File file = new File(plugin.getDataFolder(),  "users" + File.separator + uuid + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -121,7 +121,7 @@ class ProfileUtils{
 
     private File[] getProfileFiles()
     {
-       File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "users", "");
+       File file = new File(plugin.getDataFolder() + File.separator + "users", "");
        File[] files = file.listFiles();
        return files;
     }

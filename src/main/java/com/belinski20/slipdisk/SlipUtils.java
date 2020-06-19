@@ -13,7 +13,6 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 class SlipUtils{
 
@@ -33,8 +32,8 @@ class SlipUtils{
     public void createUserSlipFile(String userID, String rank) throws IOException {
         FileConfiguration config;
         FileConfiguration rankConfig;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
-        File rankFile = new File("plugins" + File.separator + "slipdisk"  + File.separator + "Ranks.yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
+        File rankFile = new File(plugin.getDataFolder(), "Ranks.yml");
         rankConfig = YamlConfiguration.loadConfiguration(rankFile);
         int slipTotal = (int)rankConfig.get("Ranks." + rank);
         if(file.createNewFile())
@@ -85,7 +84,7 @@ class SlipUtils{
      */
     public void addSlip(String userID, Location player, Location block) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -117,7 +116,7 @@ class SlipUtils{
     {
         ArrayList<Slip> slips = new ArrayList<>();
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         if(file.exists())
         {
             config = YamlConfiguration.loadConfiguration(file);
@@ -223,7 +222,7 @@ class SlipUtils{
      */
     private void fixSlips(String userID, ArrayList<Slip> remainingSlips) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         setAmountZero(userID);
         if(file.exists())
         {
@@ -244,7 +243,7 @@ class SlipUtils{
      */
     private void setAmountZero(String userID) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
         config.set("Slip.Amount", 0);
         config.save(file);
@@ -266,7 +265,7 @@ class SlipUtils{
                 if(!slipFile.getName().equals(oldUserID + ".yml"))
                 {
                     plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Renaming File from " + oldUserID + ".yml to " + newUserID + ".yml!");
-                    File newFile = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + newUserID + ".yml");
+                    File newFile = new File(plugin.getDataFolder(), "slips" + File.separator + newUserID + ".yml");
                     slipFile.renameTo(newFile);
                     updateSigns(newUserID);
                     return true;
@@ -278,7 +277,7 @@ class SlipUtils{
 
     public void updateSlipFile(String userID, int total) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
         config.set("Slip.Total", total);
         config.save(file);
@@ -291,7 +290,7 @@ class SlipUtils{
      */
     private void updateSigns(String userID) throws IOException {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
 
         int j = 0;
@@ -331,7 +330,7 @@ class SlipUtils{
      */
     private File[] getSlipFiles()
     {
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips", "");
+        File file = new File(plugin.getDataFolder() + File.separator + "slips", "");
         return file.listFiles();
     }
 
@@ -343,7 +342,7 @@ class SlipUtils{
     public int getMaxSlip(String userID)
     {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
 
         int totalAmountSlips = 0;
         if(file.exists())
@@ -363,7 +362,7 @@ class SlipUtils{
     public int getCurrentSlipAmount(String userID)
     {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
 
         int currentAmountSlips = 0;
         if(file.exists())
@@ -383,7 +382,7 @@ class SlipUtils{
     public boolean hasMaxSlips(String userID)
     {
         FileConfiguration config;
-        File file = new File("plugins" + File.separator + "slipdisk" + File.separator + "slips" + File.separator + userID + ".yml");
+        File file = new File(plugin.getDataFolder(), "slips" + File.separator + userID + ".yml");
 
         if(file.exists())
         {

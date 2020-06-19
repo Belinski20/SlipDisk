@@ -6,28 +6,36 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public final class Slipdisk extends JavaPlugin {
 
-    private static Plugin plugin;
     private SlipUtils slipUtils;
     private ProfileUtils profileUtils;
     private PermissionIntegration permissionIntegration;
+    private Timer time;
 
     @Override
     public void onEnable() {
-        plugin = this;
         slipUtils = new SlipUtils(this);
         profileUtils = new ProfileUtils(this);
         permissionIntegration = new PermissionIntegration(this);
         registerEvents(this, new SlipEvents(slipUtils, profileUtils, permissionIntegration, this));
+        createDirectories();
+        time = new Timer();
+        time.schedule(new FileBackup(this), 0, TimeUnit.HOURS.toMillis(4));
+    }
+
+    private void createDirectories()
+    {
         File userDirectory = new File(getDataFolder(), "users");
         File slipDirectory = new File(getDataFolder(), "slips");
+        File backUpDirectory = new File(getDataFolder(), "backup");
         if(!userDirectory.exists())
         {
             if(userDirectory.mkdirs())
@@ -46,6 +54,15 @@ public final class Slipdisk extends JavaPlugin {
             else
                 getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Failed To Create Slip Directory");
         }
+        if(!backUpDirectory.exists())
+        {
+            if(backUpDirectory.mkdirs())
+            {
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Backup Directory Created");
+            }
+            else
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "Failed To Create Backup Directory");
+        }
         try {
             permissionIntegration.createRankFile();
         } catch (IOException e) {
@@ -57,7 +74,7 @@ public final class Slipdisk extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        plugin = null;
+
     }
 
     public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {

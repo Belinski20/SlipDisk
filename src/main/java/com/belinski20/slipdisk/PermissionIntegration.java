@@ -43,7 +43,7 @@ class PermissionIntegration {
 
     public void createRankFile() throws IOException {
         FileConfiguration config;
-        File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
+        File rankFile = new File(plugin.getDataFolder(), "Ranks.yml");
 
         if(!rankFile.exists())
         {
@@ -60,7 +60,7 @@ class PermissionIntegration {
     public int getSlipTotal(String rank)
     {
         FileConfiguration config;
-        File rankFile = new File("plugins" + File.separator + "slipdisk" +  File.separator + "Ranks.yml");
+        File rankFile = new File(plugin.getDataFolder(), "Ranks.yml");
         config = YamlConfiguration.loadConfiguration(rankFile);
         if(config.get("Ranks." + rank) != null)
         {

@@ -94,7 +94,7 @@ class SlipEvents implements Listener {
                 return;
             if(slipUtils.fileContains(userID, (Sign)event.getBlock().getState()))
             {
-                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "A slip for userID was broken!");
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "A slip for " + userID +" was broken!");
                 removeSlip(userID, event);
                 return;
             }
