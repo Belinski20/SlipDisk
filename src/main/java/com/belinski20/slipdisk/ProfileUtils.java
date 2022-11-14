@@ -112,14 +112,16 @@ public class ProfileUtils{
                 double ppitch = config.getDouble("Profile.SLIPS." + i + ".ppitch");
                 double pyaw = config.getDouble("Profile.SLIPS." + i + ".pyaw");
 
-                Location sign = new Location(world, blockX, blockY, blockZ);
-                Location player = new Location(world, px, py, pz, (float)pyaw, (float)ppitch);
+                if(world != null)
+                {
+                    Location sign = new Location(world, blockX, blockY, blockZ);
+                    Location player = new Location(world, px, py, pz, (float)pyaw, (float)ppitch);
 
-                Slip slip = new Slip(player, sign);
+                    Slip slip = new Slip(player, sign);
 
-                slips.add(slip);
+                    slips.add(slip);
+                }
             }
-
 
             Profile profile = new Profile(uuid, slips, rankAmount, boughtAmount, truncatedName, id);
             Slipdisk.s.identities.addIdentity(profile.getUserID(), UUID.fromString(uuid));

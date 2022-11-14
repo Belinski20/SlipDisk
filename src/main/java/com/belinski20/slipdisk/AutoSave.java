@@ -1,5 +1,6 @@
 package com.belinski20.slipdisk;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import java.util.TimerTask;
 
@@ -14,8 +15,9 @@ public class AutoSave extends TimerTask {
         }
         catch(Exception e)
         {
-            System.out.println(ChatColor.RED +  "Could not Save Error Below:");
-            System.out.println("Error running thread " + e.getMessage());
+            Bukkit.getLogger().info(ChatColor.RED +  "Could not Save Error Below:");
+            Bukkit.getLogger().info("Error running thread " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
