@@ -1,24 +1,26 @@
 package com.belinski20.slipdisk;
 
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
-class PermissionIntegration {
+public class PermissionIntegration {
 
-    private Plugin plugin;
+    private Plugin plugin = Slipdisk.s;
     private Permission perms;
 
-    PermissionIntegration(Plugin plugin)
+    PermissionIntegration()
     {
-        this.plugin = plugin;
         setupPermissions();
     }
 
@@ -74,5 +76,10 @@ class PermissionIntegration {
     public String getUserRank(Player player)
     {
         return getPermissions().getPrimaryGroup(player);
+    }
+
+    public int getSlipTotal(Player player)
+    {
+        return getSlipTotal(getUserRank(player));
     }
 }
