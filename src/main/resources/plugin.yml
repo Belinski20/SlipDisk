@@ -1,7 +1,7 @@
 name: Slipdisk
 version: ${project.version}
 main: com.belinski20.slipdisk.Slipdisk
-api-version: 1.15
+api-version: 1.16
 authors: [belinski20]
 description: A SpinalCraft exclusive plugin for a close to vanilla teleportation system
 depend: [Vault]
@@ -13,5 +13,31 @@ commands:
     permission: slipdisk.slip
   update:
     permission-message: Do not have valid permissions to use
-    description: Goes through each player's file and updates ranks and slip totals from permissions
+    usage: /update <player>
+    description: Updates a specific players slip rank
     permission: slipdisk.update
+  resetslips:
+    permission-message: Do not have valid permissions to use
+    usage: /resetslips <username>
+    description: Resets a players slip file and removes their existing slip signs
+    permission: slipdisk.resetslips
+  buyslip:
+    permission-message: Do not have valid permissions to use
+    usage: (Player) /buyslip or (Console) /buyslip <player>
+    description: (Testing) Increments bought slip amount by 1
+    permission: slipdisk.buy
+  sellslip:
+    permission-message: Do not have valid permissions to use
+    usage: (Player) /sellslip or (Console) /sellslip <player>
+    description: (Testing) Decreases bought slip amount by 1
+    permission: slipdisk.buy
+  slipinfo:
+    permission-message: Do not have valid permissions to use
+    usage: (Player) /slipinfo <username> [gui]
+    description: shows slip based information for a player
+    permission: slipdisk.info
+  forceslip:
+    permission-message: Do not have valid permissions to use
+    usage: use forceslip on a signs first line with a players slip id on the signs second line
+    description: force a player to have a slip on a given sign
+    permission: slipdisk.force
