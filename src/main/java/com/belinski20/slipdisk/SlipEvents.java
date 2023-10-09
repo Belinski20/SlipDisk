@@ -3,13 +3,16 @@ package com.belinski20.slipdisk;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Entity;
@@ -21,9 +24,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.w3c.dom.Text;
 
 import java.util.*;
 import java.util.List;
@@ -98,6 +105,28 @@ class SlipEvents implements Listener {
         {
             event.line(0, Component.text().content("Slip").color(NamedTextColor.DARK_RED).build());
             event.line(1, Component.text().content(profile.getUserID()).build());
+        {
+            if(p.isProfile(player.getUniqueId()))
+            {
+                profile = p;
+                break;
+            }
+        }
+
+        if(profile == null)
+        {
+            String truncatedName = Slipdisk.s.profileUtils.truncateUserName(player.getName());
+            profile = new Profile(player, Slipdisk.s.permissionIntegration.getSlipTotal(player), 0, truncatedName, Slipdisk.s.profileList.size() + 1);
+            Slipdisk.s.profileList.add(profile);
+            Slipdisk.s.identities.addIdentity(profile.getUserID(), profile.getUUID());
+        }
+
+        //Fix below messages
+        if(profile.canAddSlip())
+        {
+            event.setLine(0, ChatColor.DARK_RED + "Slip");
+
+            event.setLine(1, profile.getUserID());
 
             Slip slip = new Slip(player.getLocation(), event.getBlock().getLocation());
             profile.addSlip(slip);
@@ -315,6 +344,7 @@ class SlipEvents implements Listener {
 
         if(sourceBlock.getType() != Material.AIR)
             return;
+
 
         if(!(block.getState() instanceof Sign))
             return;
