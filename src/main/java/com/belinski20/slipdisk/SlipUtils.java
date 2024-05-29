@@ -50,6 +50,7 @@ public class SlipUtils{
             Block block = slip.getSignLocation().getBlock();
             Sign sign = (Sign)block.getState();
             sign.setLine(1, profile.getUserID());
+            sign.update();
             slip.getSignLocation().getWorld().playSound(slip.getSignLocation(), Sound.BLOCK_ANVIL_PLACE, 100, 1);
             count++;
         }

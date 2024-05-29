@@ -3,18 +3,16 @@ package com.belinski20.slipdisk;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -24,13 +22,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
-import org.w3c.dom.Text;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 import java.util.List;
@@ -91,42 +87,27 @@ class SlipEvents implements Listener {
             if(slip.getSignLocation().getBlock().getState() instanceof Sign)
             {
                 Sign sign = (Sign)slip.getSignLocation().getBlock().getState();
-                String userID = sign.getSide(Side.FRONT).getLine(1);
-                if(sign.getSide(Side.FRONT).getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
-                    if(profile.getUserID().equals(userID))
+                Side signSide = getUserNameSideOfSign(sign);
+
+                if(signSide == null)
+                    return;
+
+                TextComponent slipComponent = (TextComponent)sign.getSide(signSide).line(0);
+                TextComponent slipNameComponent = (TextComponent)sign.getSide(signSide).line(1);
+                if(slipComponent.content().equalsIgnoreCase("Slip") && slipComponent.color().equals(NamedTextColor.DARK_RED))
+                    if(profile.getUserID().equals(slipNameComponent.content()))
                         continue;
             }
             profile.removeSlip(slip.getSignLocation());
             plugin.getServer().getConsoleSender().sendMessage(Component.text().content("A slip endpoint with no slip sign has removed from " + profile.getUserID() + " profile.").color(NamedTextColor.RED).build());
         }
 
+
         //Fix below messages
         if(profile.canAddSlip())
         {
             event.line(0, Component.text().content("Slip").color(NamedTextColor.DARK_RED).build());
-            event.line(1, Component.text().content(profile.getUserID()).build());
-        {
-            if(p.isProfile(player.getUniqueId()))
-            {
-                profile = p;
-                break;
-            }
-        }
-
-        if(profile == null)
-        {
-            String truncatedName = Slipdisk.s.profileUtils.truncateUserName(player.getName());
-            profile = new Profile(player, Slipdisk.s.permissionIntegration.getSlipTotal(player), 0, truncatedName, Slipdisk.s.profileList.size() + 1);
-            Slipdisk.s.profileList.add(profile);
-            Slipdisk.s.identities.addIdentity(profile.getUserID(), profile.getUUID());
-        }
-
-        //Fix below messages
-        if(profile.canAddSlip())
-        {
-            event.setLine(0, ChatColor.DARK_RED + "Slip");
-
-            event.setLine(1, profile.getUserID());
+            event.line(1, Component.text().content(profile.getUserID()).color(NamedTextColor.DARK_BLUE).build());
 
             Slip slip = new Slip(player.getLocation(), event.getBlock().getLocation());
             profile.addSlip(slip);
@@ -177,9 +158,8 @@ class SlipEvents implements Listener {
         //Fix below messages
         if(profile.canAddSlip())
         {
-            event.setLine(0, ChatColor.DARK_RED + "Slip");
-
-            event.setLine(1, profile.getUserID());
+            event.line(0, Component.text().content("Slip").color(NamedTextColor.DARK_RED).build());
+            event.line(1, Component.text().content(profile.getUserID()).color(NamedTextColor.DARK_BLUE).build());
 
             Slip slip = new Slip(player.getLocation(), event.getBlock().getLocation());
             profile.addSlip(slip);
@@ -216,11 +196,14 @@ class SlipEvents implements Listener {
         if(event.getBlock().getState() instanceof Sign)
         {
             Sign sign = (Sign)event.getBlock().getState();
-            String userID = sign.getSide(Side.FRONT).getLine(1);
-            if(!sign.getSide(Side.FRONT).getLine(0).equalsIgnoreCase(ChatColor.DARK_RED + "Slip"))
+            Side signSide = getUserNameSideOfSign(sign);
+
+            if(signSide == null)
                 return;
 
-            UUID uuid = Slipdisk.s.identities.getIdentity(sign.getSide(Side.FRONT).getLine(1));
+            TextComponent component = (TextComponent)sign.getSide(signSide).line(1);
+
+            UUID uuid = Slipdisk.s.identities.getIdentity(component.content());
             Profile profile = Slipdisk.s.profileUtils.getProfile(uuid);
 
             if(profile == null)
@@ -233,12 +216,26 @@ class SlipEvents implements Listener {
 
             if(profile.contains(event.getBlock().getLocation()))
             {
-                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "A slip for " + userID +" was broken!");
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "A slip for " + component.content() +" was broken!");
                 profile.removeSlip(event.getBlock().getLocation());
                 event.getPlayer().sendMessage(ChatColor.GREEN + "Slip Un-Registered From SlipDisk!");
             }
         }
 
+    }
+
+    public Side getUserNameSideOfSign(Sign sign)
+    {
+        TextComponent frontSideText = (TextComponent) sign.getSide(Side.FRONT).line(0);
+        TextComponent backSideText = (TextComponent) sign.getSide(Side.BACK).line(0);
+
+        if(frontSideText.color() != null)
+            if(frontSideText.content().equals("Slip") && frontSideText.color().equals(NamedTextColor.DARK_RED))
+                return Side.FRONT;
+        if(backSideText.color() != null)
+            if(backSideText.content().equals("Slip") && backSideText.color().equals(NamedTextColor.DARK_RED))
+                return Side.BACK;
+        return null;
     }
 
     private List<Sign> getConnectedSigns(Block b)
@@ -279,14 +276,37 @@ class SlipEvents implements Listener {
 
         Sign sign = (Sign)event.getClickedBlock().getState();
 
-        if(!sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
+        Side signSide = getUserNameSideOfSign(sign);
+
+        if(signSide == null)
             return;
 
-        UUID uuid = Slipdisk.s.identities.getIdentity(sign.getLine(1));
+        TextComponent idComponent = (TextComponent) sign.getSide(signSide).line(1);
+
+        UUID uuid = Slipdisk.s.identities.getIdentity(idComponent.content());
         Profile profile = Slipdisk.s.profileUtils.getProfile(uuid);
+
+
+        if (Slipdisk.s.aprilFools == true && profile != null)
+        {
+            if(profile.getIsPublic() || (!profile.isTrusted(event.getPlayer().getUniqueId()) && !profile.getUUID().equals(event.getPlayer().getUniqueId())))
+            {
+                profile = Slipdisk.s.profileUtils.getRandomProfile();
+                event.getPlayer().teleport(profile.getRandomSlip().getPlayerLocation());
+                return;
+            }
+        }
 
         if(profile != null)
         {
+            if(!profile.getUUID().equals(event.getPlayer().getUniqueId()) && !event.getPlayer().hasPermission("slipdisk.bypass"))
+            {
+                if(profile.getIsPublic() == false && !profile.isTrusted(event.getPlayer().getUniqueId()))
+                {
+                    event.getPlayer().sendMessage(Messages.privateSlip());
+                    return;
+                }
+            }
             if(profile.contains(sign.getLocation()))
             {
                 if(profile.getAmountOfSlips() == 1)
@@ -301,7 +321,6 @@ class SlipEvents implements Listener {
 
         event.getPlayer().sendMessage(ChatColor.RED + "This slip is not registered in this version of SlipDisk");
         event.getClickedBlock().getWorld().createExplosion(event.getClickedBlock().getLocation(), 0, false);
-        //event.getClickedBlock().breakNaturally();
     }
 
     @EventHandler
@@ -317,74 +336,34 @@ class SlipEvents implements Listener {
             {
                 for(Sign s : signs)
                 {
-                    if(!s.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
+                    Side signSide = getUserNameSideOfSign(s);
+                    if(signSide == null)
                         return;
 
-                    UUID uuid = Slipdisk.s.identities.getIdentity(s.getLine(1));
+                    TextComponent component = (TextComponent)s.getSide(signSide).line(1);
+
+                    UUID uuid = Slipdisk.s.identities.getIdentity(component.content());
                     Profile profile = Slipdisk.s.profileUtils.getProfile(uuid);
 
                     if(profile == null)
                         return;
 
-                    profile.removeSlip(s.getLocation());
-                    plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "A Slip For " +  profile.getUserID() + " broke due To gravity.");
+                    new BukkitRunnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            if(!event.isCancelled())
+                            {
+                                profile.removeSlip(s.getLocation());
+                                plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "A Slip For " +  profile.getUserID() + " broke due To gravity.");
+                            }
+                            this.cancel();
+                        }
+                    }.runTaskTimer(Slipdisk.s, 20, 0);
                 }
             }
         }
 
     }
-
-    /*
-    @EventHandler
-    public void onPhysicsSignBreak(BlockPhysicsEvent event){
-        Sign sign = null;
-        BlockFace attached;
-        Block block = event.getBlock();
-        Block sourceBlock = event.getSourceBlock();
-
-        if(sourceBlock.getType() != Material.AIR)
-            return;
-
-
-        if(!(block.getState() instanceof Sign))
-            return;
-
-
-
-        if(block.getState().getBlockData() instanceof Sign)
-        {
-            sign = (Sign)block.getState().getBlockData();
-        }
-        sign = (Sign)block.getState();
-
-        if(sourceBlock.getType() == Material.AIR)
-        {
-            if(sign != null)
-            {
-                attached = sign.getFacing().getOppositeFace();
-                Block attachedTo = block.getRelative(attached);
-                if(attachedTo.getType() != Material.AIR)
-                    return;
-            }
-            else
-            {
-                Block under = block.getRelative(BlockFace.DOWN);
-                if(under.getType() != Material.AIR)
-                    return;
-            }
-        }
-
-        if(!sign.getLine(0).equals(ChatColor.DARK_RED + "Slip"))
-            return;
-
-        UUID uuid = Slipdisk.s.identities.getIdentity(sign.getLine(1));
-        Profile profile = Slipdisk.s.profileUtils.getProfile(uuid);
-
-        if(profile == null)
-            return;
-
-        profile.removeSlip(sign.getLocation());
-        plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "A Slip For " +  profile.getUserID() + " broke due To gravity.");
-    }
-     */
 }

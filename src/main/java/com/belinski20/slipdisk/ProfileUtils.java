@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class ProfileUtils{
@@ -49,6 +50,15 @@ public class ProfileUtils{
             config.set("Profile.ID", profile.getIdNumber());
             config.set("Profile.RANKAMOUNT", profile.getRankAmount());
             config.set("Profile.BOUGHTAMOUNT", profile.getBoughtAmount());
+            config.set("Profile.PUBLIC", profile.getIsPublic());
+            List<String> trustedMembers = new LinkedList<>();
+
+            for(UUID id : profile.getTrustedMembersUUIDList())
+            {
+                trustedMembers.add(id.toString());
+            }
+
+            config.set("Profile.TRUSTED", trustedMembers);
 
             config.set("Profile.SLIPS", null);
 
@@ -90,11 +100,21 @@ public class ProfileUtils{
         {
             FileConfiguration config = YamlConfiguration.loadConfiguration(file);
             List<Slip> slips = new LinkedList<>();
+            List<String> trustedMembers;
             String uuid = getUUIDFromFileName(file.getName());
             String truncatedName = config.getString("Profile.TRUNCNAME");
             int id = config.getInt("Profile.ID");
             int rankAmount = config.getInt("Profile.RANKAMOUNT");
             int boughtAmount = config.getInt("Profile.BOUGHTAMOUNT");
+            boolean isPublic = config.getBoolean("Profile.PUBLIC", true);
+            trustedMembers = config.getStringList("Profile.TRUSTED");
+
+            List<UUID> trustedMemberUUIDs = new LinkedList<>();
+            for(String trustedMember : trustedMembers)
+            {
+                UUID trustedUUID = UUID.fromString(trustedMember);
+                trustedMemberUUIDs.add(trustedUUID);
+            }
 
             // Load slips using max amount of slips
             for(int i = 0; i < rankAmount + boughtAmount; i++)
@@ -123,7 +143,7 @@ public class ProfileUtils{
                 }
             }
 
-            Profile profile = new Profile(uuid, slips, rankAmount, boughtAmount, truncatedName, id);
+            Profile profile = new Profile(uuid, slips, trustedMemberUUIDs, rankAmount, boughtAmount, truncatedName, id, isPublic);
             Slipdisk.s.identities.addIdentity(profile.getUserID(), UUID.fromString(uuid));
             Slipdisk.s.profileList.add(profile);
             loadedCount++;
@@ -150,5 +170,19 @@ public class ProfileUtils{
                 return profile;
         }
         return null;
+    }
+
+    public Profile getRandomProfile()
+    {
+        Random randomSlip = new Random();
+        List<Profile> publicProfiles = new LinkedList();
+        for(Profile profile : Slipdisk.s.profileList)
+        {
+            if(profile.getIsPublic() && profile.getSlips().size() > 0)
+                publicProfiles.add(profile);
+        }
+
+        int random = randomSlip.nextInt(publicProfiles.size());
+        return publicProfiles.get(random);
     }
 }

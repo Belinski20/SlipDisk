@@ -1,7 +1,9 @@
 package com.belinski20.slipdisk.Command;
 
+import com.belinski20.slipdisk.Messages;
 import com.belinski20.slipdisk.Profile;
 import com.belinski20.slipdisk.Slipdisk;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -38,10 +40,10 @@ public class ResetCommand implements TabExecutor {
             }
 
             profile.clearSlips();
-            sender.sendMessage(ChatColor.GREEN + "Slips for " + args[0] + " have been reset!");
+            sender.sendMessage(Messages.makeComponent("Slips for " + args[0] + " have been reset!", NamedTextColor.GREEN));
         }
         else
-            sender.sendMessage(ChatColor.RED + args[0] + " does not have any slips");
+            sender.sendMessage(Messages.makeComponent(args[0] + " does not have any slips", NamedTextColor.RED));
         return true;
     }
 

@@ -23,6 +23,7 @@ public class InfoCommand implements TabExecutor {
         message += "\nTotal Slips: " + profile.getMaxSlipAmount();
         message += "\nRank Slips: " + profile.getRankAmount();
         message += "\nBought Slips: " + profile.getBoughtAmount();
+        message += "\nSlip Access: " + (profile.getIsPublic() ? "Public" : "Private");
         return message;
     }
 

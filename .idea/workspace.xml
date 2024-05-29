@@ -35,6 +35,7 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Command/SlipCommand.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Command/UpdateCommand.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Identities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Messages.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Profile.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipInfoGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
@@ -98,8 +99,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Zachary/Downloads/paper-1.20.1-31.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Zachary/Contacts/Desktop/Paper Server/plugins/SpinalcraftCore.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.1150748&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -143,7 +144,6 @@
       <method v="2" />
     </configuration>
     <configuration name="Spigot Debugger" type="Remote">
-      <module name="SlipDisk" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" />
@@ -196,9 +196,39 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Command/SlipCommand.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/SlipEvents.java</url>
+          <line>200</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Identities.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="11" />
+          <line>28</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Identities.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Identities.java</url>
+          <line>27</line>
+          <properties class="com.belinski20.slipdisk.Identities" method="getIdentity">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/com/belinski20/slipdisk/Identities.java</url>
+          <line>10</line>
+          <properties field="identityMap" class="com.belinski20.slipdisk.Identities" />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
